@@ -1,4 +1,4 @@
-import { RecyclerViewBackedScrollViewBase } from "react-native"
+
 
 let timetableObj = {}
 let listaCorsi = {}

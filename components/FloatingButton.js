@@ -1,7 +1,7 @@
 import React from "react";
-import {View, Text, StyleSheet, Animated, TouchableWithoutFeedback, TouchableHighlight, Pressable} from 'react-native'
+import {View, Text, StyleSheet, Animated, TouchableHighlight, Pressable} from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-//import FloatingButton from './FloatingButton
+import {lightColor} from '../colors/palette'
 
 export default class FloatingButton extends React.Component{
     animation = new Animated.Value(0);
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
         width:60,
         height:60,
         borderRadius: 10,
-        backgroundColor: "#e6ffcc"
+        backgroundColor: lightColor
     },
     secondary:{
         alignItems: "center",
@@ -173,6 +173,6 @@ const styles = StyleSheet.create({
         width: 100,
         height:48,
         borderRadius: 10,
-        backgroundColor: "#e6ffcc"
+        backgroundColor: lightColor
     }
 });

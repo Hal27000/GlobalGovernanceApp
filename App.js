@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,7 +8,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {HomeScreen} from './screens/HomeScreen'
 import {LinkScreen} from './screens/LinkScreen';
 import {CalendarListScreen} from './screens/CalendarListScreen'
-import {LectureDetailsScreen} from './screens/LectureDetailsScreen'
+import {LectureDetailsScreen} from './screens/LectureDetailsScreen2'
+
+import { darkColor } from './colors/palette';
 
 
 
@@ -24,7 +24,7 @@ import {LectureDetailsScreen} from './screens/LectureDetailsScreen'
 function TimetableScreen({navigation}) {
   return (
     
-      <Stack.Navigator initialRouteName={CalendarListScreen}>
+    <Stack.Navigator initialRouteName={CalendarListScreen}>
       <Stack.Screen name="CalendarListScreen" component={CalendarListScreen} options={{headerShown:false}}/>
       <Stack.Screen name="LectureDetailsScreen" component={LectureDetailsScreen} options={{title:'Course Agenda'}}
       
@@ -51,7 +51,7 @@ function App() {
         initialRouteName="Timetable"
         
         screenOptions={{
-          tabBarActiveTintColor:'#006600',
+          tabBarActiveTintColor:darkColor,
           tabBarInactiveTintColor:'grey',
           
           headerShown:false

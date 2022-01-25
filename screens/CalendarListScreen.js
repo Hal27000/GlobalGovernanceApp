@@ -1,4 +1,4 @@
-import { View, StatusBar, Text, ActivityIndicator, StyleSheet, TouchableHighlight, Button} from "react-native";
+import { View, StatusBar, Text, ActivityIndicator, StyleSheet} from "react-native";
 import { Calendario} from "../components/Calendario"
 import React, {useState} from 'react';
 import { listaCorsi } from '../api/fetch';

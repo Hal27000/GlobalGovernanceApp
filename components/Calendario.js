@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { View, Text, TouchableHighlight, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet, Pressable } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import { primoAnno, secondoAnno, terzoAnno, timetableObj } from '../api/fetch';
 import FloatingButton from './FloatingButton'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { lightColor, mediumColor, darkColor } from '../colors/palette';
 
 import { fetchCourseCalendar } from '../api/fetch';
  
@@ -158,41 +159,30 @@ class Calendario extends React.Component{
 
     return(
       <View>
-        {/*console.log(item)*/}
-        {// onPress={()=> this.props.navigation.navigate('LectureDetailsScreen', { courseId: item['corsi_id'], nomeCorso: item['titolo']})}
-        }
-        <TouchableHighlight
-          onPress={()=>{
-            this.funzionedilancio(item)
-            this.setState(prevState =>({
+        
+        
+        
+
+        <Pressable onPress={()=>{this.funzionedilancio(item)
+                                this.setState(prevState =>({
               isLoading: !prevState.isLoading
-            }))
-          }} 
-          style={{
-              marginRight: 10, 
-              marginTop: 17, 
-              borderRadius:10, 
-              shadowColor: "black",
-              shadowOffset: {width: 10, height: 10},
-              shadowOpacity: 1,
-              elevation: 5,
-              shadowRadius:30
-            }}>
+        }))}} style={styles.blocchettoLezione}>
+
           
-          
-          <View style={{borderRadius:10, backgroundColor:'#00833f', shadowColor: 'red', shadowOffset: {width: 20, height: 100}}} >
+
+          <View style={{borderRadius:10, backgroundColor:mediumColor}} >
 
             {/*header del titolo */}
             <View style={{ padding:6, paddingLeft:12}}> 
-              <Text style={{color:'#fff'}}>
-                {item['titolo']}
-              </Text> 
+                <Text style={{color:'#fff'}}>
+                  {item['titolo']}
+                </Text> 
             </View>
 
+
             {/* spazio orario, aula, lezione */}
-            <View style={{ padding:12, borderBottomStartRadius:10, borderBottomEndRadius:10, backgroundColor:'#fff'}}> 
-              
-              
+            <View style={{padding:12, borderBottomStartRadius:10, borderBottomEndRadius:10, backgroundColor:'#fff'}}>
+
               <View style={{flexDirection:'row'}}>
                 <MaterialCommunityIcons name="clock-outline" color={"grey"} size={20} />
                 <Text style={{color:'#000'}}>
@@ -204,23 +194,22 @@ class Calendario extends React.Component{
               <View style={{flexDirection:'row'}}>
                 <MaterialCommunityIcons name="door-open" color={"grey"} size={20} />
                 <Text style={{color:'#000'}}>
-                       {'  '+item['luogo']}
+                  {'  '+item['luogo']}
                 </Text>
               </View>
 
               <View style={{flexDirection:'row'}}>
                 <MaterialCommunityIcons name="account-multiple" color={"grey"} size={20} />
                 <Text style={{color:'#000'}}>
-                       {'  '+item['categoria']}
+                  {'  '+item['categoria']}
                 </Text>
-              </View>             
-              
-              
-              
+              </View>
+
             </View>
 
           </View>
-        </TouchableHighlight>
+
+        </Pressable>
       </View>
 
     )
@@ -302,16 +291,16 @@ class Calendario extends React.Component{
               calendarBackground: '#fff',
               textSectionTitleColor: '#b6c1cd',
               textSectionTitleDisabledColor: '#d9e1e8',
-              selectedDayBackgroundColor: '#006600',
+              selectedDayBackgroundColor: darkColor,
               selectedDayTextColor: '#ffffff',
-              todayTextColor: '#006600',
+              todayTextColor: darkColor,
               dayTextColor: '#2d4150',
               textDisabledColor: '#d9e1e8',
-              dotColor: '#006600',
+              dotColor: darkColor,
               selectedDotColor: '#ffffff',
               arrowColor: 'orange',
               disabledArrowColor: '#d9e1e8',
-              monthTextColor: 'green',
+              monthTextColor: darkColor,
               indicatorColor: '#333',
               textDayFontFamily: 'monospace',
               textMonthFontFamily: 'monospace',
@@ -360,6 +349,14 @@ const styles = StyleSheet.create({
       backgroundColor: '#F5FCFF88',
       justifyContent: 'center',
       alignItems: 'center'
+  },
+  blocchettoLezione: {
+    marginRight: 10, 
+              marginTop: 17, 
+              borderRadius:10, 
+              shadowColor: "black",
+              shadowOpacity: 1,
+              elevation: 5,
   }
 })
 
