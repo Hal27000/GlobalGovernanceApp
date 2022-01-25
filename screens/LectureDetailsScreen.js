@@ -1,4 +1,4 @@
-import { View, Text, Button, Linking, Alert, ScrollView, StatusBar, TouchableHighlight, Pressable} from "react-native";
+import { View, Text, Button, Linking, Alert, ScrollView, StatusBar, TouchableHighlight, Pressable, StyleSheet} from "react-native";
 import * as WebBrowser from 'expo-web-browser';
 import React, { useEffect} from 'react';
 import { listaCorsi } from '../api/fetch';
@@ -39,43 +39,21 @@ function LectureDetailsScreen({route}){
         {/* riga pulsanti */}
         <View style={{ flexDirection:'row', alignItems:'center', paddingTop:5, paddingBottom:5}}>
 
-          <Pressable onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/'+courseId) }>
-            <View style={bottoncini}>
-              <Text style={{color:'white'}}>Courses Page</Text>              
-            </View>  
-          </Pressable>
-
-          <Pressable
-            
-            style={({ pressed }) => [
-              {
-                backgroundColor: pressed
-                  ? 'white'
-                  : 'green'
-              }
-            ]}>
-
-            
-            <View style={bottoncini}>
-              <Text style={{color:'white'}}>Courses Page</Text>              
-            </View>     
-            
-          </Pressable>
-          
-          
           {/* pulsante Course Page*/}
-          <TouchableHighlight  onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/'+courseId)}>            
-            <View style={bottoncini}>
-              <Text style={{color:'white'}}>Courses Page</Text>              
-            </View>            
-          </TouchableHighlight>
+          <Pressable style={({ pressed }) => [{backgroundColor: pressed ? 'white' : '#e6ffcc'}, styles.pressabili]}
+            onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/'+courseId)}>
+                       
+            <Text style={styles.coloreTesto}>Courses Page</Text>              
+                           
+          </Pressable>
 
           {/* pulsante Teaching Material*/}
-          <TouchableHighlight  style={{borderRadius:10 ,marginLeft:10}} onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/materiali/'+courseId)}>            
-            <View style={bottoncini}>
-              <Text style={{color:'white'}}>Teaching Material</Text>              
-            </View>            
-          </TouchableHighlight>
+          <Pressable style={({ pressed }) => [{backgroundColor: pressed ? 'white' : '#e6ffcc'}, styles.pressabili]}
+            onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/materiali/'+courseId)}>
+                       
+            <Text style={styles.coloreTesto}>Teaching Material</Text>              
+                           
+          </Pressable>
           
         </View>
           
@@ -140,14 +118,24 @@ convertitoreData = (data) => {
 
 const bottoncini =  {
 
-  backgroundColor:'#00833f',
-  padding:8,
-  borderRadius:10,      
-  shadowRadius: 1,
-  shadowColor: "red",
-  shadowOpacity: 1,
-  elevation:1,
-  shadowOffset: {width: -10, height: -10}
+  
+  
 }
+
+const styles = StyleSheet.create({
+  pressabili:{
+    borderRadius:10,
+    padding:8,
+    borderRadius:10,      
+    shadowRadius: 1,
+    shadowColor: "black",
+    shadowOpacity: 1,
+    elevation:1,
+    shadowOffset: {width: -10, height: -10}
+  },
+  coloreTesto:{
+    color: "#000"
+  }
+})
 
 export {LectureDetailsScreen}
