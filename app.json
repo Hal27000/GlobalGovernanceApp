@@ -4,9 +4,9 @@
     "slug": "GlobalGovernance",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/e.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logotv.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

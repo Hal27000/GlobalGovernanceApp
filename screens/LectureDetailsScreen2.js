@@ -3,8 +3,9 @@ import * as WebBrowser from 'expo-web-browser';
 import React, { useEffect} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { listaCorsi } from '../api/fetch';
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
-import { mediumColor} from '../colors/palette';
+import { mediumColor, greyBack} from '../colors/palette';
 
 let valoroso = true
 
@@ -17,51 +18,57 @@ function LectureDetailsScreen({route}){
 
 
   return(
-    <View style={{flexDirection:'column'}}>
-      <StatusBar barStyle="light-content" backgroundColor="#00833f" />
+    <View style={{flexDirection:'column', marginBottom:useBottomTabBarHeight()}}>
+      <StatusBar barStyle="light-content" backgroundColor={mediumColor} />
 
       <View style={{padding:10, backgroundColor:"white", shadowColor:'black',elevation:5}}>
               
         {/*Titolo*/}                     
-        <Text style={{fontSize:24, fontWeight:'bold', marginTop:10, marginBottom:5}}>{nomeCorso}</Text>
-              
-        
+        <Text style={{fontSize:24, fontWeight:'bold', marginTop:10, marginBottom:5}}>
+          {nomeCorso}
+        </Text>
+
 
         {/* riga pulsanti */}
-        <View style={{ flexDirection:'row', alignItems:'center', paddingTop:5, paddingBottom:5, marginTop:5, marginBottom:5}}>
+        <View style={{ flexDirection:'row', alignItems:'center', marginTop:10, marginBottom:10}}>
 
           {/* pulsante Course Page*/}
           <Pressable style={({ pressed }) => [{backgroundColor: pressed ? 'white' : coloreBottoni}, styles.pressabili]}
-            onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/'+courseId)}>
-                        
-            <Text style={styles.coloreTestoBottoni}>Courses Page</Text>              
-                            
+              onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/'+courseId)}>
+                          
+              <Text style={styles.coloreTestoBottoni}>Courses Page </Text>
+              <MaterialCommunityIcons name="open-in-new" color={'white'} size={15} />              
+                              
           </Pressable>
 
           {/* pulsante Teaching Material*/}
           <Pressable style={({ pressed }) => [{backgroundColor: pressed ? 'white' : coloreBottoni}, styles.pressabili]}
-            onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/materiali/'+courseId)}>
-                        
-            <Text style={styles.coloreTestoBottoni}>Teaching Material</Text>              
-                            
+              onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/materiali/'+courseId)}>
+                          
+              <Text style={styles.coloreTestoBottoni}>Teaching Material </Text>
+              <MaterialCommunityIcons name="open-in-new" color={'white'} size={15} />               
+                              
           </Pressable>
-            
+              
         </View>
 
       </View>
 
-      <View style={{backgroundColor:'#eee', paddingHorizontal:10}}>
+      <View style={{backgroundColor:{greyBack}}}>
         {/* Tabella Orari*/} 
-        <ScrollView style={{alignContent:'center'}}>
+      <ScrollView style={{ paddingHorizontal:10}}>
                 
-          { 
-            listaCorsi[courseId].lezioni.map(grafica)
-          }
-          
-                
-        </ScrollView>
-        
+                { 
+                  listaCorsi[courseId].lezioni.map(grafica)
+                }
+                  
+                        
+              </ScrollView>
       </View>
+      
+      
+        
+    
 
     </View>
     
@@ -85,21 +92,21 @@ grafica = (lezione) =>{
     <View style={styles.stileSlot}>
       
       <View style={{ flex:1.5, padding:5}}>
-        <Text style={styles.stileData, {fontSize:20, color:'green'}}>{lezione['Datainizio'].slice(8)+convertitoreData(lezione['Datainizio']).slice(0,3)}</Text>
+        <Text style={styles.stileData, {fontSize:20, color:'green'}}>{lezione['Datainizio'].slice(8)+ " " +convertitoreData(lezione['Datainizio']).slice(0,3)}</Text>
         <Text style={styles.stileData}>{convertitoreData(lezione['Datainizio']).slice(-4)}</Text>
         
       </View>
 
       <View style={{flexDirection:'row', flex:2, padding:5, alignItems: 'center'}}>
         <MaterialCommunityIcons name="clock-outline" color={"grey"} size={18} />
-        <Text>{lezione['orarioinizio'].slice(0,2)+":"+lezione['orarioinizio'].slice(2)}</Text>
+        <Text> {lezione['orarioinizio'].slice(0,2)+":"+lezione['orarioinizio'].slice(2)}</Text>
         <Text> - </Text>
         <Text>{lezione['orariofine'].slice(0,2)+":"+lezione['orariofine'].slice(2)}</Text>
       </View>
 
       <View style={{ flexDirection:'row', flex:2, padding:10,  alignItems: 'center'}}>
         <MaterialCommunityIcons name="door-open" color={"grey"} size={18} />
-        <Text>{lezione['DESCRIPTION']}</Text>
+        <Text> {lezione['DESCRIPTION']}</Text>
       </View>
       
     </View>
@@ -120,16 +127,18 @@ const bottoncini =  {
   
 }
 
-const coloreBottoni = "#00833f"
+const coloreBottoni = mediumColor
 
 const styles = StyleSheet.create({
   pressabili:{
-    borderRadius:10,
+    
     padding:10,
     marginRight: 10,
-    borderRadius:10,      
+    borderRadius:5,      
     shadowColor: "black",
     elevation:5,
+    flexDirection:'row',
+    alignItems:'center'
     
   },
   coloreTestoBottoni:{
@@ -137,14 +146,11 @@ const styles = StyleSheet.create({
   },
   stileSlot:{
     flexDirection:'row',
-    backgroundColor:'#f2ffe6',
+    backgroundColor:'white',
     margin:5,
-    borderRadius:8,
+    borderRadius:5,
     padding:5,
-    
-    
     shadowColor: "black",
-    
     elevation:5,
     
   },

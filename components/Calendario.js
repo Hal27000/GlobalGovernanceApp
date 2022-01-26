@@ -4,11 +4,11 @@ import { Agenda } from 'react-native-calendars';
 import { primoAnno, secondoAnno, terzoAnno, timetableObj } from '../api/fetch';
 import FloatingButton from './FloatingButton'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { lightColor, mediumColor, darkColor } from '../colors/palette';
+import { lightColor, mediumColor, darkColor, greyBack } from '../colors/palette';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import { fetchCourseCalendar } from '../api/fetch';
- 
-  
+
   
   
   
@@ -166,11 +166,13 @@ class Calendario extends React.Component{
         <Pressable onPress={()=>{this.funzionedilancio(item)
                                 this.setState(prevState =>({
               isLoading: !prevState.isLoading
-        }))}} style={styles.blocchettoLezione}>
+        }))}} 
+        
+        style={({ pressed }) => [{backgroundColor: pressed ? darkColor : mediumColor}, styles.blocchettoLezione]}>
 
           
 
-          <View style={{borderRadius:10, backgroundColor:mediumColor}} >
+          <View >
 
             {/*header del titolo */}
             <View style={{ padding:6, paddingLeft:12}}> 
@@ -181,7 +183,7 @@ class Calendario extends React.Component{
 
 
             {/* spazio orario, aula, lezione */}
-            <View style={{padding:12, borderBottomStartRadius:10, borderBottomEndRadius:10, backgroundColor:'#fff'}}>
+            <View style={{padding:12, backgroundColor:'#fff', borderBottomRightRadius:10, borderBottomLeftRadius:10}}>
 
               <View style={{flexDirection:'row'}}>
                 <MaterialCommunityIcons name="clock-outline" color={"grey"} size={20} />
@@ -254,7 +256,7 @@ class Calendario extends React.Component{
      
       return(
         
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1}}>
       
           <Agenda
                     
@@ -286,7 +288,7 @@ class Calendario extends React.Component{
             
 
             showClosingKnob={false}
-            theme={{ backgroundColor: '#f2f2f2',
+            theme={{ backgroundColor: {greyBack},
               
               calendarBackground: '#fff',
               textSectionTitleColor: '#b6c1cd',
@@ -298,8 +300,6 @@ class Calendario extends React.Component{
               textDisabledColor: '#d9e1e8',
               dotColor: darkColor,
               selectedDotColor: '#ffffff',
-              arrowColor: 'orange',
-              disabledArrowColor: '#d9e1e8',
               monthTextColor: darkColor,
               indicatorColor: '#333',
               textDayFontFamily: 'monospace',
@@ -327,7 +327,7 @@ class Calendario extends React.Component{
           {
             this.state.isLoading &&
           <View style={styles.loading}>
-            <ActivityIndicator pointerEvents="none" color="blue" size='large' animating={this.state.isLoading}/>
+            <ActivityIndicator pointerEvents="none" color={darkColor} size='large' animating={this.state.isLoading}/>
           </View>}
           
 
@@ -352,11 +352,11 @@ const styles = StyleSheet.create({
   },
   blocchettoLezione: {
     marginRight: 10, 
-              marginTop: 17, 
-              borderRadius:10, 
-              shadowColor: "black",
-              shadowOpacity: 1,
-              elevation: 5,
+    marginTop: 17, 
+    borderRadius:10, 
+    shadowColor: "black",
+    shadowOpacity: 1,
+    elevation: 5,
   }
 })
 

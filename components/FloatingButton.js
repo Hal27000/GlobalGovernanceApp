@@ -1,7 +1,7 @@
 import React from "react";
 import {View, Text, StyleSheet, Animated, TouchableHighlight, Pressable} from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {lightColor} from '../colors/palette'
+import {lightColor, mediumColor} from '../colors/palette'
 
 export default class FloatingButton extends React.Component{
     animation = new Animated.Value(0);
@@ -99,37 +99,43 @@ export default class FloatingButton extends React.Component{
         return(
             <View style={[styles.container, this.props.style]}>
 
-                
 
                 <Animated.View style={[styles.button, styles.secondary, firstYear, opacity]}>
-                    <TouchableHighlight style={styles.secondary} underlayColor={underlay} onPress={()=>{this.toggleMenu(1,true)}}>
+                    <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(1,true)}}>
                         <Text>1° Year</Text>
-                    </TouchableHighlight>
-                </Animated.View>
-
-                <Animated.View style={[styles.button, styles.secondary, secondYear, opacity]}>
-                    <TouchableHighlight style={styles.secondary} underlayColor={underlay} onPress={()=>{this.toggleMenu(2,true)}}>
-                        <Text>2° Year</Text>
-                    </TouchableHighlight>
-                </Animated.View>
-
-                <Animated.View style={[styles.button, styles.secondary, thirdYear, opacity]}>
-                    <TouchableHighlight style={styles.secondary} underlayColor={underlay} onPress={()=>{this.toggleMenu(3,true)}}>
-                        <Text>3° Year</Text>
-                    </TouchableHighlight>
+                    </Pressable>
                 </Animated.View>
 
                 
-                <Animated.View style={[styles.button, styles.secondary, allYears, opacity]}>
-                    <TouchableHighlight style={styles.secondary} underlayColor={underlay} onPress={()=>{this.toggleMenu(4,true)}}>
-                        <Text>All Courses</Text>
-                    </TouchableHighlight>
+
+                <Animated.View style={[styles.button, styles.secondary, secondYear, opacity]}>
+                    <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(2,true)}}>
+                        <Text>2° Year</Text>
+                    </Pressable>
                 </Animated.View>
 
+                
+
+                <Animated.View style={[styles.button, styles.secondary, thirdYear, opacity]}>
+                    <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(3,true)}}>
+                        <Text>3° Year</Text>
+                    </Pressable>
+                </Animated.View>
+
+       
+                
+                <Animated.View style={[styles.button, styles.secondary, allYears, opacity]}>
+                    <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(4,true)}}>
+                        <Text>All Courses</Text>
+                    </Pressable>
+                </Animated.View>
+                
+                
+
                 <Animated.View style={[styles.button, styles.menu, rotation]}>
-                    <TouchableHighlight style={[styles.button, styles.menu]} underlayColor={underlay} onPress={()=>{this.toggleMenu(0)}}>
-                    <MaterialCommunityIcons name="menu" color={"grey"} size={26} />
-                    </TouchableHighlight>
+                    <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : lightColor}, styles.menu, styles.button]} onPress={()=>{this.toggleMenu(0)}}>
+                        <MaterialCommunityIcons name="menu" color={"grey"} size={26} />
+                    </Pressable>
                 </Animated.View>
                 
             </View>
@@ -159,20 +165,19 @@ const styles = StyleSheet.create({
         shadowColor: "black",
         shadowOpacity: 1,
         elevation:2,
-        shadowOffset: {width: 500, height: 500}
+        
     },
     menu: {
         width:60,
         height:60,
-        borderRadius: 10,
-        backgroundColor: lightColor
+        borderRadius: 10
     },
     secondary:{
         alignItems: "center",
         justifyContent: "center",
         width: 100,
         height:48,
-        borderRadius: 10,
-        backgroundColor: lightColor
+        borderRadius: 10
+        
     }
 });

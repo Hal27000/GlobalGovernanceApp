@@ -3,13 +3,14 @@ import { Calendario} from "../components/Calendario"
 import React, {useState} from 'react';
 import { listaCorsi } from '../api/fetch';
 import { useNavigation } from '@react-navigation/native';
+import { mediumColor } from "../colors/palette";
 
 function CalendarListScreen(props){
   const navigation = useNavigation()
   const [isLoading, setLoading] = useState(false)
   return(
     <View  style={{ flex: 1}}>
-      <StatusBar barStyle="light-content" backgroundColor="#006600" />
+      <StatusBar barStyle="light-content" backgroundColor={mediumColor} />
 
       <Calendario caricamento={()=>setLoading(!isLoading)} navigation={navigation} listaCorsi={listaCorsi}></Calendario>
       

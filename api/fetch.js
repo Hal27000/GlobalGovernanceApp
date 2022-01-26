@@ -102,9 +102,8 @@ const fetchCourseCalendar = async (CourseID) => {
 
 export {fetchCourseCalendar}
 export {timetableObj}
-export {primoAnno}
-export {secondoAnno}
-export {terzoAnno}
+export {primoAnno, secondoAnno, terzoAnno}
+
 export {listaCorsi}
 
 /*const esempioFormatoJson = {

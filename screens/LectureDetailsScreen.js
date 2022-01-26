@@ -3,14 +3,16 @@ import * as WebBrowser from 'expo-web-browser';
 import React, { useEffect} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { listaCorsi } from '../api/fetch';
+import { mediumColor } from "../colors/palette";
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 let valoroso = true
 
 
+const tabBarHeight = useBottomTabBarHeight()
 
-
-
-
+console.log(useBottomTabBarHeight())
+//ciao
 
 
 
@@ -27,7 +29,7 @@ function LectureDetailsScreen({route}){
 
   return(
     <View style={{padding:10, flex:1, marginBottom:40, backgroundColor:"white"}}>
-      <StatusBar barStyle="light-content" backgroundColor="#00833f" />
+      <StatusBar barStyle="light-content" backgroundColor={mediumColor} />
       
 
       {/* View Titolo*/}
@@ -67,9 +69,9 @@ function LectureDetailsScreen({route}){
           listaCorsi[courseId].lezioni.map(grafica)
         }
         
-              
+          
       </ScrollView>
-        
+      
       
         
     </View>

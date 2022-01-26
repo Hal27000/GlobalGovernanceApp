@@ -3,6 +3,7 @@ import React, { useState, useRef} from 'react';
 import { WebView } from 'react-native-webview';
 import ProgressBar from 'react-native-progress/Bar';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { mediumColor } from "../colors/palette";
 
 
 
@@ -27,7 +28,7 @@ function LinkScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <StatusBar barStyle="light-content" backgroundColor="#006600" />
+        <StatusBar barStyle="light-content" backgroundColor={mediumColor} />
 
 
         { !isLoaded ?
