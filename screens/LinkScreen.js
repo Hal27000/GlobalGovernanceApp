@@ -1,9 +1,9 @@
-import { StyleSheet, View, Text, StatusBar, Button, TouchableHighlight} from "react-native";
+import { StyleSheet, View, Text, StatusBar, Pressable} from "react-native";
 import React, { useState, useRef} from 'react';
 import { WebView } from 'react-native-webview';
 import ProgressBar from 'react-native-progress/Bar';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { mediumColor } from "../colors/palette";
+import { lightColor, mediumColor } from "../colors/palette";
 
 
 
@@ -28,43 +28,46 @@ function LinkScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <StatusBar barStyle="light-content" backgroundColor={mediumColor} />
+        <StatusBar barStyle="light-content" backgroundColor='#990033' />
 
 
-        { !isLoaded ?
-          <ProgressBar progress={progress} width={400} borderWidth={0} />
-          : null
-        }
+        
         <View>
           <WebView ref={webViewRef} source={{uri:'https://economia.uniroma2.it/linktree'}}
             style={{ width:400}}
             onLoadProgress={({nativeEvent})=> setProgress(nativeEvent.progress)}
+            onLoadStart={()=>setLoaded(false)}
             onLoadEnd={()=>setLoaded(true)}
             cacheEnabled={true}
             
             
           />
+
+          { !isLoaded ?
+            <ProgressBar progress={progress} width={400} borderWidth={0} />
+            : null
+          }
+          
           <View style={{flexDirection:'row'}}>
+
+            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? 'red' : '#990033'}, stileBottoni]} onPress={goback}>
+              <View style={{alignItems:'center', alignContent:'center'}}>
+                <MaterialCommunityIcons name="arrow-left" color={iconColor} size={iconSize} />
+                <Text style={{color:iconColor}}>Go Back</Text>
+              
+              </View>
+            </Pressable>
+
+            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? 'red' : '#990033'}, stileBottoni]} onPress={goforward}>
+              <View style={{alignItems:'center', alignContent:'center'}}>
+                <MaterialCommunityIcons name="arrow-right" color={iconColor} size={iconSize} />
+                
+                <Text style={{color:iconColor}}>Go Forward</Text>
+              
+              </View>
+            </Pressable>
+
             
-            <TouchableHighlight style={{flex:1, justifyContent:'center', alignItems:'center', padding:10}} onPress={goback}>
-            <View>
-              <MaterialCommunityIcons name="arrow-left" color={iconColor} size={26} />
-              
-              </View>
-            </TouchableHighlight>
-            <TouchableHighlight style={{flex:1, justifyContent:'center', alignItems:'center', padding:10}} onPress={goforward}>
-            <View>
-              <MaterialCommunityIcons name="arrow-right" color={iconColor} size={26} />
-              
-              </View>
-            </TouchableHighlight>
-            <TouchableHighlight style={{flex:2, justifyContent:'center', alignItems:'center', padding:10}} onPress={goforward}>
-              <View>
-              <MaterialCommunityIcons name="home" color={iconColor} size={26} />
-              
-              </View>
-              
-            </TouchableHighlight>
           </View>
           
         </View>
@@ -74,7 +77,18 @@ function LinkScreen() {
   );
 }
 
-const iconColor = "grey"
+const iconColor = "#fff"
+const iconSize = 22
+
+const stileBottoni = {
+  flex:1,
+  justifyContent:'center',
+  alignContent:'center', 
+  padding:10,
+  borderTopWidth:1,
+  borderColor:'white'
+  
+}
 
 export {LinkScreen}
 

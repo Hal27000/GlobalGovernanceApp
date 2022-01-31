@@ -1,11 +1,11 @@
-import { View, Text, Button, Linking, Alert, ScrollView, StatusBar, TouchableHighlight, Pressable, StyleSheet} from "react-native";
+import { View, Text, ScrollView, StatusBar, TouchableHighlight, Pressable, StyleSheet} from "react-native";
 import * as WebBrowser from 'expo-web-browser';
 import React, { useEffect} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { listaCorsi } from '../api/fetch';
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
-import { mediumColor, greyBack} from '../colors/palette';
+import { mediumColor, greyBack, darkColor} from '../colors/palette';
 
 let valoroso = true
 
@@ -18,10 +18,10 @@ function LectureDetailsScreen({route}){
 
 
   return(
-    <View style={{flexDirection:'column', marginBottom:useBottomTabBarHeight()}}>
+    <View style={{flexDirection:'column',flex:3}}>
       <StatusBar barStyle="light-content" backgroundColor={mediumColor} />
 
-      <View style={{padding:10, backgroundColor:"white", shadowColor:'black',elevation:5}}>
+      <View style={{padding:10, backgroundColor:"white", shadowColor:'black',elevation:5,flex:1}}>
               
         {/*Titolo*/}                     
         <Text style={{fontSize:24, fontWeight:'bold', marginTop:10, marginBottom:5}}>
@@ -33,7 +33,7 @@ function LectureDetailsScreen({route}){
         <View style={{ flexDirection:'row', alignItems:'center', marginTop:10, marginBottom:10}}>
 
           {/* pulsante Course Page*/}
-          <Pressable style={({ pressed }) => [{backgroundColor: pressed ? 'white' : coloreBottoni}, styles.pressabili]}
+          <Pressable style={({ pressed }) => [{backgroundColor: pressed ? darkColor : mediumColor}, styles.pressabili]}
               onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/'+courseId)}>
                           
               <Text style={styles.coloreTestoBottoni}>Courses Page </Text>
@@ -42,7 +42,7 @@ function LectureDetailsScreen({route}){
           </Pressable>
 
           {/* pulsante Teaching Material*/}
-          <Pressable style={({ pressed }) => [{backgroundColor: pressed ? 'white' : coloreBottoni}, styles.pressabili]}
+          <Pressable style={({ pressed }) => [{backgroundColor: pressed ? darkColor : mediumColor}, styles.pressabili]}
               onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/materiali/'+courseId)}>
                           
               <Text style={styles.coloreTestoBottoni}>Teaching Material </Text>
@@ -54,17 +54,19 @@ function LectureDetailsScreen({route}){
 
       </View>
 
-      <View style={{backgroundColor:{greyBack}}}>
-        {/* Tabella Orari*/} 
-      <ScrollView style={{ paddingHorizontal:10}}>
+      <View style={{flex:5, backgroundColor:{greyBack}}}>
+
+        <ScrollView style={{ paddingHorizontal:10}}>
                 
-                { 
-                  listaCorsi[courseId].lezioni.map(grafica)
-                }
-                  
-                        
-              </ScrollView>
+          {listaCorsi[courseId].lezioni.map(grafica)}
+          <View style={{paddingBottom:useBottomTabBarHeight()}}></View>
+                              
+        </ScrollView>
+
       </View>
+      {/* Tabella Orari*/} 
+      
+      
       
       
         
@@ -78,7 +80,7 @@ function LectureDetailsScreen({route}){
 grafica = (lezione) =>{
 
   
-  
+  /*
   let colorBk='#f3f3f4'
 
   if (valoroso){
@@ -87,24 +89,25 @@ grafica = (lezione) =>{
   }
 
   valoroso = !valoroso
+  */
 
   return(
     <View style={styles.stileSlot}>
       
-      <View style={{ flex:1.5, padding:5}}>
+      <View style={{ flex:1, alignSelf:'center'}}>
         <Text style={styles.stileData, {fontSize:20, color:'green'}}>{lezione['Datainizio'].slice(8)+ " " +convertitoreData(lezione['Datainizio']).slice(0,3)}</Text>
         <Text style={styles.stileData}>{convertitoreData(lezione['Datainizio']).slice(-4)}</Text>
         
       </View>
 
-      <View style={{flexDirection:'row', flex:2, padding:5, alignItems: 'center'}}>
+      <View style={{flexDirection:'row', flex:1, alignContent:'center',  alignItems: 'center'}}>
         <MaterialCommunityIcons name="clock-outline" color={"grey"} size={18} />
         <Text> {lezione['orarioinizio'].slice(0,2)+":"+lezione['orarioinizio'].slice(2)}</Text>
         <Text> - </Text>
         <Text>{lezione['orariofine'].slice(0,2)+":"+lezione['orariofine'].slice(2)}</Text>
       </View>
 
-      <View style={{ flexDirection:'row', flex:2, padding:10,  alignItems: 'center'}}>
+      <View style={{ flexDirection:'row', flex:1, padding:10, alignContent:'center',  alignItems: 'center'}}>
         <MaterialCommunityIcons name="door-open" color={"grey"} size={18} />
         <Text> {lezione['DESCRIPTION']}</Text>
       </View>
@@ -149,7 +152,7 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     margin:5,
     borderRadius:5,
-    padding:5,
+    padding:10,
     shadowColor: "black",
     elevation:5,
     

@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/logotv.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#00833f"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

@@ -71,17 +71,7 @@ function App() {
           }}
         />
 
-        <Tab.Screen name="QuickLink" component={LinkScreen}
-
-
-          options={{   unmountOnBlur:true, 
-            
-            
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="open-in-new" color={color} size={size} />
-            )
-          }}
-        />
+        
 
         <Tab.Screen name="Timetable" component={TimetableScreen}
           options={{    
@@ -91,10 +81,22 @@ function App() {
             ),
             tabBarStyle:{
               position: 'absolute',
-              backgroundColor: 'white',
-              opacity:0.9,
+              backgroundColor: '#ffffffe6',
+              
               elevation:0
             }
+          }}
+        />
+
+        <Tab.Screen name="QuickLink" component={LinkScreen}
+
+
+          options={{   unmountOnBlur:true, 
+            
+            
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="open-in-new" color={color} size={size} />
+            )
           }}
         />
 
