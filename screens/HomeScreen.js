@@ -34,10 +34,10 @@ function HomeScreen() {
             </View>  
       </Pressable>
             
-        <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : '#990033'}, styles.pressabili]}
+        <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'white'}, styles.pressabili]}
           onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/')}>
             <View style={styles.viste}>
-                <Image source={require('../assets/economia.png')} resizeMode='center' style={{ height:60}} />
+                <Image source={require('../assets/economia-color.png')} resizeMode='center' style={{ height:60}} />
             </View>
       </Pressable>
     

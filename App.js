@@ -10,7 +10,7 @@ import {LinkScreen} from './screens/LinkScreen';
 import {CalendarListScreen} from './screens/CalendarListScreen'
 import {LectureDetailsScreen} from './screens/LectureDetailsScreen2'
 
-import { darkColor } from './colors/palette';
+import { mediumColor } from './colors/palette';
 
 
 
@@ -51,7 +51,7 @@ function App() {
         initialRouteName="Timetable"
         
         screenOptions={{
-          tabBarActiveTintColor:darkColor,
+          tabBarActiveTintColor:mediumColor,
           tabBarInactiveTintColor:'grey',
           tabBarActiveBackgroundColor:'#f2f2f2cc',
           
