@@ -1,5 +1,6 @@
 import { View, StatusBar, Text, Pressable, StyleSheet, Image} from "react-native";
 import * as WebBrowser from 'expo-web-browser';
+import AppLoading from 'expo-app-loading';
 import { mediumColor } from "../colors/palette";
 import { useFonts,
   Quattrocento_400Regular,
@@ -15,23 +16,30 @@ import React from 'react';
 function HomeScreen() {
 
   let [fontsLoaded] = useFonts({Quattrocento_400Regular, Quattrocento_700Bold})
+  
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor={mediumColor}/>
 
+      
+
       <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'green'}, styles.pressabili]}
           onPress={()=>WebBrowser.openBrowserAsync('http://web.uniroma2.it/')}>
             <View style={styles.viste}>
-                <Image source={require('../assets/due.png')} resizeMode='center'/> 
+                <Image source={require('../assets/due.png')} resizeMode='center' style={{ height:60}} /> 
             </View>  
-        </Pressable>
+      </Pressable>
             
-        <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'white'}, styles.pressabili]}
+        <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : '#990033'}, styles.pressabili]}
           onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/')}>
             <View style={styles.viste}>
-                <Image source={require('../assets/economia-rosso.png')} resizeMode='center'/>
+                <Image source={require('../assets/economia.png')} resizeMode='center' style={{ height:60}} />
             </View>
-        </Pressable>
+      </Pressable>
     
         <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'white'}, styles.pressabili]}
           onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance')}>
@@ -42,9 +50,29 @@ function HomeScreen() {
                   
                 </View>
             </View>
-        </Pressable>
+      </Pressable>
 
-       <View style={styles.viste}></View> 
+      <View style={[styles.viste,{flex:3, flexDirection:"row", alignItems:'flex-start', justifyContent:'flex-start'}]}>
+       {/* pulsante Course Page*/}
+       <Pressable style={({ pressed }) => [{backgroundColor: pressed ? darkColor : mediumColor}, {marginRight:10}]}
+              onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/'+courseId)}>
+                          
+              <Text style={{color:'white'}}>Courses Page </Text>
+                           
+                              
+          </Pressable>
+
+          {/* pulsante Teaching Material*/}
+          <Pressable style={({ pressed }) => [{backgroundColor: pressed ? darkColor : mediumColor}]}
+              onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/materiali/'+courseId)}>
+                          
+              <Text style={{color:'white'}}>Teaching Material </Text>
+                             
+                              
+          </Pressable>
+      </View> 
+
+      
                
     </View>
   );

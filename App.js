@@ -17,7 +17,7 @@ import { darkColor } from './colors/palette';
 
 
 
-//################################################## CLASSE AGENDA ############################### ciao
+//################################################## CLASSE AGENDA ############################## ciao
 
 
 
@@ -53,6 +53,7 @@ function App() {
         screenOptions={{
           tabBarActiveTintColor:darkColor,
           tabBarInactiveTintColor:'grey',
+          tabBarActiveBackgroundColor:'#f2f2f2cc',
           
           headerShown:false
           
