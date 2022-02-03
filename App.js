@@ -18,7 +18,7 @@ import { mediumColor } from './colors/palette';
 
 
 //################################################## CLASSE AGENDA ############################## ciao
-
+// eas build -p android --profile development
 
 
 function TimetableScreen({navigation}) {
