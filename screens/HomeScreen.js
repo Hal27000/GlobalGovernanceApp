@@ -52,24 +52,10 @@ function HomeScreen() {
             </View>
       </Pressable>
 
-      <View style={[styles.viste,{flex:3, flexDirection:"row", alignItems:'flex-start', justifyContent:'flex-start'}]}>
-       {/* pulsante Course Page*/}
-       <Pressable style={({ pressed }) => [{backgroundColor: pressed ? darkColor : mediumColor}, {marginRight:10}]}
-              onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/'+courseId)}>
-                          
-              <Text style={{color:'white'}}>Courses Page </Text>
-                           
-                              
-          </Pressable>
-
-          {/* pulsante Teaching Material*/}
-          <Pressable style={({ pressed }) => [{backgroundColor: pressed ? darkColor : mediumColor}]}
-              onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/corso/materiali/'+courseId)}>
-                          
-              <Text style={{color:'white'}}>Teaching Material </Text>
-                             
-                              
-          </Pressable>
+      <View style={[styles.viste,{flex:3, alignItems:'center', justifyContent:'center'}]}>
+       
+        <Text>Welcome. This app is a beta version of what shall be the first app that Tor Vergata has ever made.</Text>
+        <Text>If you encounter any problem, write to ...</Text>
       </View> 
 
       
