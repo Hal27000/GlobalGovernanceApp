@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "GlobalGovernance",
+    "name": "Global Governance4000",
     "slug": "GlobalGovernance",
-    "version": "1.0.0",
+    "version": "0.9.0",
     "orientation": "portrait",
-    "icon": "./assets/e.png",
+    "icon": "./assets/e96.png",
     "splash": {
       "image": "./assets/logotv.png",
       "resizeMode": "contain",
@@ -20,10 +20,7 @@
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/e.png",
-        "backgroundColor": "#ffffff"
-      },
+      "icon": "./assets/global-e.png",
       "package": "com.themailguy.GlobalGovernance"
     },
     "web": {

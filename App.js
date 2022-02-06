@@ -9,7 +9,6 @@ import {HomeScreen} from './screens/HomeScreen'
 import {LinkScreen} from './screens/LinkScreen';
 import {CalendarListScreen} from './screens/CalendarListScreen'
 import {LectureDetailsScreen} from './screens/LectureDetailsScreen2'
-
 import { mediumColor } from './colors/palette';
 
 
