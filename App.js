@@ -47,7 +47,7 @@ function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="Timetable"
+        initialRouteName="Global Governance"
         
         screenOptions={{
           tabBarActiveTintColor:mediumColor,
@@ -109,8 +109,8 @@ function App() {
 LocaleConfig.locales['it'] = {
   monthNames: ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],
   monthNamesShort: ['Gen.','Feb.','Mar.','Apr.','Mag.','Giu.','Lug.','Ago.','Sett.','Ott.','Nov.','Dic.'],
-  dayNames: ['Lunedì','Martedi','Mercoledi','Giovedi','Venerdi','Sabato','Domenica'],
-  dayNamesShort: ['Lun.','Mar.','Mer.','Gio.','Ven.','Sab.','Dom'],
+  dayNames: ['Domenica','Lunedì','Martedi','Mercoledi','Giovedi','Venerdi','Sabato'],
+  dayNamesShort: ['Dom','Lun.','Mar.','Mer.','Gio.','Ven.','Sab.','Dom'],
   today: 'Oggi'
 };
 LocaleConfig.defaultLocale = 'it';

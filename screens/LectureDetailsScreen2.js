@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, StatusBar, TouchableHighlight, Pressable, StyleSheet} from "react-native";
+import { View, Text, ScrollView, StatusBar, TouchableHighlight, Pressable, StyleSheet, PixelRatio} from "react-native";
 import * as WebBrowser from 'expo-web-browser';
 import React, { useEffect} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -18,16 +18,16 @@ function LectureDetailsScreen({route}){
 
 
   return(
-    <View style={{flexDirection:'column',flex:3}}>
+    <View style={{flex:1}}>
       <StatusBar barStyle="light-content" backgroundColor={mediumColor} />
 
-      <View style={{padding:10, backgroundColor:"white", shadowColor:'black',elevation:5,flex:1}}>
+      <View style={{padding:10, backgroundColor:"white", shadowColor:'black', elevation:5}}>
               
         {/*Titolo*/}                     
         <Text style={{fontSize:24, fontWeight:'bold', marginTop:10, marginBottom:5}}>
-          {nomeCorso}
+            {nomeCorso}
         </Text>
-
+          
 
         {/* riga pulsanti */}
         <View style={{ flexDirection:'row', alignItems:'center', marginTop:10, marginBottom:10}}>
@@ -51,10 +51,9 @@ function LectureDetailsScreen({route}){
           </Pressable>
               
         </View>
-
       </View>
 
-      <View style={{flex:5, backgroundColor:{greyBack}}}>
+      <View style={{ flexBasis:470, flexGrow:1, backgroundColor:{greyBack}}}>
 
         <ScrollView style={{ paddingHorizontal:10}}>
                 

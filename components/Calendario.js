@@ -284,6 +284,7 @@ class Calendario extends React.Component{
                 
               </View>;
             }}
+            firstDay={1}
 
             
 
