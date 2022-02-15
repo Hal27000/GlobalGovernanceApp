@@ -8,7 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {HomeScreen} from './screens/HomeScreen'
 import {LinkScreen} from './screens/LinkScreen';
 import {CalendarListScreen} from './screens/CalendarListScreen'
-import {LectureDetailsScreen} from './screens/LectureDetailsScreen2'
+import {LectureDetailsScreen} from './screens/LectureDetailsScreen'
 import { mediumColor } from './colors/palette';
 
 
@@ -52,8 +52,8 @@ function App() {
         screenOptions={{
           tabBarActiveTintColor:mediumColor,
           tabBarInactiveTintColor:'grey',
-          tabBarActiveBackgroundColor:'#f2f2f2cc',
-          
+          //tabBarActiveBackgroundColor:'#f2f2f2cc',
+          tabBarActiveBackgroundColor:'transparent',
           headerShown:false
           
         }}
@@ -63,41 +63,73 @@ function App() {
         >
           
         <Tab.Screen name="Global Governance" component={HomeScreen} 
-          options={{    
+          options={({ navigation }) => ({
             
-            tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="home" color={color} size={26} />
-            )
-          }}
+            tabBarIcon: ({ focused, color }) => {
+
+              let iconName;
+              if (focused){
+                iconName = 'home'
+              }else{
+                iconName = 'home-outline'
+              }
+
+
+              return <MaterialCommunityIcons name={iconName} color={color} size={26} />
+            }
+          })}
         />
 
         
 
         <Tab.Screen name="Timetable" component={TimetableScreen}
-          options={{    
-            
-            tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="clock-time-ten-outline" color={color} size={26} />
-            ),
+
+          options={({ navigation }) => ({
+                      
+            tabBarIcon: ({ focused, color }) => {
+
+              let iconName;
+              if (focused){
+                iconName = 'clock-time-ten'
+              }else{
+                iconName = 'clock-time-ten-outline'
+              }
+
+
+              return <MaterialCommunityIcons name={iconName} color={color} size={26} />
+            },
             tabBarStyle:{
               position: 'absolute',
               backgroundColor: '#ffffffe6',
               
               elevation:0
             }
-          }}
+          })}
+          
+          
         />
 
-        <Tab.Screen name="QuickLink" component={LinkScreen}
+        <Tab.Screen name="News" component={LinkScreen}
 
 
-          options={{   unmountOnBlur:true, 
-            
-            
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="open-in-new" color={color} size={size} />
-            )
-          }}
+          
+
+          options={({ navigation }) => ({
+                      
+            tabBarIcon: ({ focused, color }) => {
+
+              let iconName;
+              if (focused){
+                iconName = 'newspaper-variant'
+              }else{
+                iconName = 'newspaper-variant-outline'
+              }
+
+
+              return <MaterialCommunityIcons name={iconName} color={color} size={26} />
+            },
+            unmountOnBlur:true
+          })}
         />
 
 
@@ -106,14 +138,15 @@ function App() {
   );
 }
 
+/*
 LocaleConfig.locales['it'] = {
   monthNames: ['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'],
   monthNamesShort: ['Gen.','Feb.','Mar.','Apr.','Mag.','Giu.','Lug.','Ago.','Sett.','Ott.','Nov.','Dic.'],
   dayNames: ['Domenica','Lunedì','Martedi','Mercoledi','Giovedi','Venerdi','Sabato'],
-  dayNamesShort: ['Dom','Lun.','Mar.','Mer.','Gio.','Ven.','Sab.','Dom'],
-  today: 'Oggi'
+  dayNamesShort: ['Dom.','Lun.','Mar.','Mer.','Gio.','Ven.','Sab.'],
+  today: 'Today'
 };
-LocaleConfig.defaultLocale = 'it';
+LocaleConfig.defaultLocale = 'it';*/
 
 const styles = StyleSheet.create({
   tabNavigatorBackground:{

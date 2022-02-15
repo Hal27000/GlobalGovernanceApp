@@ -78,35 +78,24 @@ function LectureDetailsScreen({route}){
 
 grafica = (lezione) =>{
 
-  
-  /*
-  let colorBk='#f3f3f4'
-
-  if (valoroso){
-    
-    colorBk= 'white'
-  }
-
-  valoroso = !valoroso
-  */
 
   return(
     <View style={styles.stileSlot}>
       
-      <View style={{ flex:1, alignSelf:'center'}}>
+      <View style={{ flex:1}}>
         <Text style={styles.stileData, {fontSize:20, color:'green'}}>{lezione['Datainizio'].slice(8)+ " " +convertitoreData(lezione['Datainizio']).slice(0,3)}</Text>
         <Text style={styles.stileData}>{convertitoreData(lezione['Datainizio']).slice(-4)}</Text>
         
       </View>
 
-      <View style={{flexDirection:'row', flex:1, alignContent:'center',  alignItems: 'center'}}>
+      <View style={{flexDirection:'row', flex:1, alignContent:'center',  alignItems: 'center', margin:10}}>
         <MaterialCommunityIcons name="clock-outline" color={"grey"} size={18} />
         <Text> {lezione['orarioinizio'].slice(0,2)+":"+lezione['orarioinizio'].slice(2)}</Text>
         <Text> - </Text>
         <Text>{lezione['orariofine'].slice(0,2)+":"+lezione['orariofine'].slice(2)}</Text>
       </View>
 
-      <View style={{ flexDirection:'row', flex:1, padding:10, alignContent:'center',  alignItems: 'center'}}>
+      <View style={{ flexDirection:'row', flex:1, margin:10, alignContent:'center',  alignItems: 'center'}}>
         <MaterialCommunityIcons name="door-open" color={"grey"} size={18} />
         <Text> {lezione['DESCRIPTION']}</Text>
       </View>

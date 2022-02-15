@@ -1,11 +1,11 @@
-import { View, StatusBar, Text, Pressable, StyleSheet, Image} from "react-native";
+import { View, StatusBar, Text, Pressable, StyleSheet, Image, Alert} from "react-native";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as WebBrowser from 'expo-web-browser';
 import AppLoading from 'expo-app-loading';
 import { mediumColor } from "../colors/palette";
-import { useFonts,
-  Quattrocento_400Regular,
-  Quattrocento_700Bold 
+import { useFonts
 } from '@expo-google-fonts/quattrocento'
+
 import React from 'react';
 
 
@@ -15,7 +15,19 @@ import React from 'react';
 
 function HomeScreen() {
 
-  let [fontsLoaded] = useFonts({Quattrocento_400Regular, Quattrocento_700Bold})
+  const mainAlert = (() => 
+    Alert.alert(
+      "Warning",
+      "Welcome. This app is a very important step for Global Governance and Tor Vergata. It aims to become the first app that the University will ever release. It is currently in beta testing version. If you encounter any problem, please write an email to alessiohuma@gmail.com. Leave the world better than you found it.",
+      [
+        
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    ))();
+
+  let [fontsLoaded] = useFonts({
+    'Quattrocento_400Regular':require('../assets/fonts/Quattrocento-Regular.ttf')
+  })
   
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -30,14 +42,14 @@ function HomeScreen() {
       <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'green'}, styles.pressabili]}
           onPress={()=>WebBrowser.openBrowserAsync('http://web.uniroma2.it/')}>
             <View style={styles.viste}>
-                <Image source={require('../assets/due.png')} resizeMode='center' style={{ height:60}} /> 
+                <Image source={require('../assets/due-en.png')} resizeMode='center' style={{ height:65}} /> 
             </View>  
       </Pressable>
             
-        <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'white'}, styles.pressabili]}
+      <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'white'}, styles.pressabili]}
           onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/')}>
             <View style={styles.viste}>
-                <Image source={require('../assets/economia-color.png')} resizeMode='center' style={{ height:60}} />
+                <Image source={require('../assets/economia-en.png')} resizeMode='center' style={{ height:90}} />
             </View>
       </Pressable>
     
@@ -52,10 +64,23 @@ function HomeScreen() {
             </View>
       </Pressable>
 
-      <View style={[styles.viste,{flex:3, alignItems:'center', justifyContent:'center'}]}>
+      <View style={[styles.viste,{flex:3, justifyContent:'center'}]}>
+
+        <View style={{flex:1, flexDirection:"row"}}>
+          <Pressable style={styles.blocchettoLezione}>
+            <MaterialCommunityIcons name="book-open-page-variant" color={mediumColor} size={50} />
+            <Text>Courses</Text>
+          </Pressable>
+
+          <Pressable style={styles.blocchettoLezione}>
+          <MaterialCommunityIcons name="table" color={mediumColor} size={50} />
+            <Text>Programme Structure</Text>
+          </Pressable>
+        </View>
        
-        <Text>Welcome. This app is a beta version of what shall be the first app that Tor Vergata has ever made.</Text>
-        <Text>If you encounter any problem, write to ...</Text>
+        <View style={{flex:2}}>
+          
+        </View>
       </View> 
 
       
@@ -84,7 +109,18 @@ const styles = StyleSheet.create({
   testo:{
     color:'green',
     fontFamily:'Quattrocento_400Regular'
-  },  
+  },
+  blocchettoLezione: {
+    margin:10,
+    backgroundColor:'white',
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center', 
+    borderRadius:10, 
+    shadowColor: "black",
+    shadowOpacity: 1,
+    elevation: 5,
+  }  
 });
 
 export {HomeScreen}

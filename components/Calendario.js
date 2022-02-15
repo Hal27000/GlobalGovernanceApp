@@ -4,8 +4,9 @@ import { Agenda } from 'react-native-calendars';
 import { primoAnno, secondoAnno, terzoAnno, timetableObj } from '../api/fetch';
 import FloatingButton from './FloatingButton'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import { lightColor, mediumColor, darkColor, greyBack } from '../colors/palette';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+
 
 import { fetchCourseCalendar } from '../api/fetch';
 
@@ -284,6 +285,14 @@ class Calendario extends React.Component{
                 
               </View>;
             }}
+
+            // renderKnob={() => {
+            //   return <View style={{marginBottom:20}} >
+            //     <Text>Ciao</Text>
+            //   </View>;
+            // }}
+
+            
             firstDay={1}
 
             
