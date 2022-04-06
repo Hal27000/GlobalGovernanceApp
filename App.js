@@ -9,7 +9,7 @@ import {HomeScreen} from './screens/HomeScreen'
 import {LinkScreen} from './screens/LinkScreen';
 import {CalendarListScreen} from './screens/CalendarListScreen'
 import {LectureDetailsScreen} from './screens/LectureDetailsScreen'
-import { mediumColor } from './colors/palette';
+import { colors } from './config/config';
 
 
 
@@ -50,7 +50,7 @@ function App() {
         initialRouteName="Global Governance"
         
         screenOptions={{
-          tabBarActiveTintColor:mediumColor,
+          tabBarActiveTintColor:colors.mediumColor,
           tabBarInactiveTintColor:'grey',
           //tabBarActiveBackgroundColor:'#f2f2f2cc',
           tabBarActiveBackgroundColor:'transparent',

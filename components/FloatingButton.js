@@ -1,7 +1,7 @@
 import React from "react";
 import {View, Text, StyleSheet, Animated, TouchableHighlight, Pressable} from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {lightColor, mediumColor} from '../colors/palette'
+import {colors, course, fonts} from '../config/config'
 
 export default class FloatingButton extends React.Component{
     animation = new Animated.Value(0);
@@ -25,6 +25,8 @@ export default class FloatingButton extends React.Component{
         
     };
 
+    
+
     render(){
         const firstYear = {
             transform: [
@@ -37,6 +39,8 @@ export default class FloatingButton extends React.Component{
                 }
             ]
         };
+
+       
 
 
         const secondYear = {
@@ -95,45 +99,46 @@ export default class FloatingButton extends React.Component{
             outputRange: [0, 0, 1]
         })
 
+        
+
 
         return(
             <View style={[styles.container, this.props.style]}>
 
 
-                <Animated.View style={[styles.button, styles.secondary, firstYear, opacity]}>
-                    <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(1,true)}}>
-                        <Text>1° Year</Text>
-                    </Pressable>
-                </Animated.View>
+                    <Animated.View style={[styles.button, styles.secondary, firstYear, opacity]}>
+                        <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : colors.lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(1,true)}}>
+                            <Text style={styles.textButton}>1° Year</Text>
+                        </Pressable>
+                    </Animated.View>
 
-                
+                    
 
-                <Animated.View style={[styles.button, styles.secondary, secondYear, opacity]}>
-                    <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(2,true)}}>
-                        <Text>2° Year</Text>
-                    </Pressable>
-                </Animated.View>
+                    <Animated.View style={[styles.button, styles.secondary, secondYear, opacity]}>
+                        <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : colors.lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(2,true)}}>
+                            <Text style={styles.textButton}>2° Year</Text>
+                        </Pressable>
+                    </Animated.View>
 
-                
 
-                <Animated.View style={[styles.button, styles.secondary, thirdYear, opacity]}>
-                    <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(3,true)}}>
-                        <Text>3° Year</Text>
-                    </Pressable>
-                </Animated.View>
+                    <Animated.View style={[styles.button, styles.secondary, thirdYear, opacity]}>
+                        <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : colors.lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(3,true)}}>
+                            <Text style={styles.textButton}>3° Year</Text>
+                        </Pressable>
+                    </Animated.View>
 
-       
-                
-                <Animated.View style={[styles.button, styles.secondary, allYears, opacity]}>
-                    <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(4,true)}}>
-                        <Text>All Courses</Text>
-                    </Pressable>
-                </Animated.View>
+        
+                    
+                    <Animated.View style={[styles.button, styles.secondary, allYears, opacity]}>
+                        <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : colors.lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(4,true)}}>
+                            <Text style={styles.textButton}>All Courses</Text>
+                        </Pressable>
+                    </Animated.View>
                 
                 
 
                 <Animated.View style={[styles.button, styles.menu, rotation]}>
-                    <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : lightColor}, styles.menu, styles.button]} onPress={()=>{this.toggleMenu(0)}}>
+                    <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : colors.lightColor}, styles.menu, styles.button]} onPress={()=>{this.toggleMenu(0)}}>
                         <MaterialCommunityIcons name="menu" color={"grey"} size={26} />
                     </Pressable>
                 </Animated.View>
@@ -161,11 +166,14 @@ const styles = StyleSheet.create({
         position:"absolute",
         alignItems: "center",
         justifyContent: "center",
-        shadowRadius: 100,
-        shadowColor: "black",
-        shadowOpacity: 1,
+        shadowRadius: 3,
+        shadowColor: "grey",
+        shadowOpacity: 0.2,
         elevation:2,
         
+    },
+    textButton:{
+        fontFamily:fonts
     },
     menu: {
         width:60,

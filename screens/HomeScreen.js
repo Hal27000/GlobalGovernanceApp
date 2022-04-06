@@ -1,10 +1,12 @@
-import { View, StatusBar, Text, Pressable, StyleSheet, Image, Alert} from "react-native";
+import { View, StatusBar, Text, Pressable, StyleSheet, Image, Alert, useWindowDimensions, PixelRatio} from "react-native";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
 import AppLoading from 'expo-app-loading';
-import { mediumColor } from "../colors/palette";
+import { colors, course } from "../config/config";
 import { useFonts
 } from '@expo-google-fonts/quattrocento'
+import {AndroidFonts} from '../components/AndroidFonts'
 
 import React from 'react';
 
@@ -15,10 +17,24 @@ import React from 'react';
 
 function HomeScreen() {
 
+  const { height, width } = useWindowDimensions(); 
+  let iconSize = 36;
+  let buttonFontSize = 14;
+  let courseTitleSize = 26;
+
+  if (PixelRatio.get() <2){
+    iconSize=18
+    buttonFontSize = 10;
+    courseTitleSize = 18;
+  }
+
+  console.log( height +' and '+ width)
+  console.log( PixelRatio.get())
+
   const mainAlert = (() => 
     Alert.alert(
       "Warning",
-      "Welcome. This app is a very important step for Global Governance and Tor Vergata. It aims to become the first app that the University will ever release. It is currently in beta testing version. If you encounter any problem, please write an email to alessiohuma@gmail.com. Leave the world better than you found it.",
+      "Welcome. This app is a very important step for Global Governance and Tor Vergata. It aims to become the first app that the University has ever released. It is currently in beta testing version. If you encounter any problem, please write an email to alessiohuma@gmail.com. Leave the world better than you found it.",
       [
         
         { text: "OK", onPress: () => console.log("OK Pressed") }
@@ -35,7 +51,7 @@ function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor={mediumColor}/>
+      <StatusBar barStyle="light-content" backgroundColor={colors.mediumColor}/>
 
       
 
@@ -57,8 +73,8 @@ function HomeScreen() {
           onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance')}>
             <View style={styles.viste}>
                 <View>
-                  <Text style={styles.testo}>BACHELOR DEGREE IN</Text>
-                  <Text style={[styles.testo,{fontSize:26}]}>GLOBAL GOVERNANCE</Text>
+                  <Text style={styles.testo}>{course.type}</Text>
+                  <Text style={[styles.testo,{fontSize:courseTitleSize}]}>{course.name}</Text>
                   
                 </View>
             </View>
@@ -66,20 +82,28 @@ function HomeScreen() {
 
       <View style={[styles.viste,{flex:3, justifyContent:'center'}]}>
 
-        <View style={{flex:1, flexDirection:"row"}}>
-          <Pressable style={styles.blocchettoLezione}>
-            <MaterialCommunityIcons name="book-open-page-variant" color={mediumColor} size={50} />
-            <Text>Courses</Text>
+        <View style={{flex:1, flexDirection:"row", paddingVertical:10}}>
+          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'white'}, styles.blocchettoLezione]} 
+          onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/dida/courses')} >
+            <MaterialCommunityIcons name="book-open-page-variant" color={colors.mediumColor} size={iconSize} />
+            <Text style={{fontFamily:'sans-serif-light', fontSize:buttonFontSize}}>Courses</Text>
           </Pressable>
 
-          <Pressable style={styles.blocchettoLezione}>
-          <MaterialCommunityIcons name="table" color={mediumColor} size={50} />
-            <Text>Programme Structure</Text>
+          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'white'},{marginHorizontal:20}, styles.blocchettoLezione]} 
+          onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/programme-structure/')} >
+          <MaterialCommunityIcons name="table" color={colors.mediumColor} size={iconSize} />
+            <Text style={{fontFamily:'sans-serif-light', fontSize:buttonFontSize}}>Programme Structure</Text>
+          </Pressable>
+
+          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'white'}, styles.blocchettoLezione]} 
+          onPress={()=>WebBrowser.openBrowserAsync('https://delphi.uniroma2.it/totem/jsp/homeStudenti.jsp?language=EN')} >
+          <Ionicons name="person" size={iconSize} color={colors.mediumColor} />
+            <Text style={{fontFamily:'sans-serif-light', fontSize:buttonFontSize}}>Students Delphi</Text>
           </Pressable>
         </View>
        
         <View style={{flex:2}}>
-          
+          <AndroidFonts></AndroidFonts>
         </View>
       </View> 
 
@@ -96,6 +120,10 @@ const styles = StyleSheet.create({
   },
   pressabili:{
       flex:1,
+      shadowColor: "black",
+      shadowOpacity: 0.4,
+      shadowRadius:2,
+      shadowOffset:{width:0,height:3},
       
       marginBottom:20,
       borderRadius:5,
@@ -111,14 +139,16 @@ const styles = StyleSheet.create({
     fontFamily:'Quattrocento_400Regular'
   },
   blocchettoLezione: {
-    margin:10,
-    backgroundColor:'white',
+    
+   
     flex:1,
     alignItems:'center',
     justifyContent:'center', 
     borderRadius:10, 
     shadowColor: "black",
-    shadowOpacity: 1,
+    shadowOpacity: 0.4,
+    shadowRadius:2,
+    shadowOffset:{width:0,height:3},
     elevation: 5,
   }  
 });

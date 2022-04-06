@@ -5,7 +5,7 @@ import { primoAnno, secondoAnno, terzoAnno, timetableObj } from '../api/fetch';
 import FloatingButton from './FloatingButton'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { lightColor, mediumColor, darkColor, greyBack } from '../colors/palette';
+import { lightColor, colors, fonts } from '../config/config';
 
 
 import { fetchCourseCalendar } from '../api/fetch';
@@ -160,16 +160,13 @@ class Calendario extends React.Component{
 
     return(
       <View>
-        
-        
-        
 
         <Pressable onPress={()=>{this.funzionedilancio(item)
                                 this.setState(prevState =>({
               isLoading: !prevState.isLoading
         }))}} 
         
-        style={({ pressed }) => [{backgroundColor: pressed ? darkColor : mediumColor}, styles.blocchettoLezione]}>
+        style={({ pressed }) => [{backgroundColor: pressed ? colors.darkColor : colors.mediumColor}, styles.blocchettoLezione]}>
 
           
 
@@ -177,7 +174,7 @@ class Calendario extends React.Component{
 
             {/*header del titolo */}
             <View style={{ padding:6, paddingLeft:12}}> 
-                <Text style={{color:'#fff'}}>
+                <Text style={{color:'#fff', fontFamily:fonts}}>
                   {item['titolo']}
                 </Text> 
             </View>
@@ -188,7 +185,7 @@ class Calendario extends React.Component{
 
               <View style={{flexDirection:'row'}}>
                 <MaterialCommunityIcons name="clock-outline" color={"grey"} size={20} />
-                <Text style={{color:'#000'}}>
+                <Text style={styles.stileTestoLezione}>
                     {'  '+item['whenst'].slice(0,2)+":"+item['whenet'].slice(2) + " - " +item['whenet'].slice(0,2)+":"+item['whenet'].slice(2)}
                 </Text>
 
@@ -196,15 +193,15 @@ class Calendario extends React.Component{
 
               <View style={{flexDirection:'row'}}>
                 <MaterialCommunityIcons name="door-open" color={"grey"} size={20} />
-                <Text style={{color:'#000'}}>
-                  {'  '+item['luogo']}
+                <Text style={styles.stileTestoLezione}>
+                  {item['luogo']==='Lezione online'?'  Online lecture':'  '+item['luogo']}
                 </Text>
               </View>
 
               <View style={{flexDirection:'row'}}>
                 <MaterialCommunityIcons name="account-multiple" color={"grey"} size={20} />
-                <Text style={{color:'#000'}}>
-                  {'  '+item['categoria']}
+                <Text style={styles.stileTestoLezione}>
+                  { item['categoria']==='Lezione'?'  Lecture' : item['categoria']==='Esercitazione'?'  Practice':'  '+item['categoria']}
                 </Text>
               </View>
 
@@ -221,7 +218,7 @@ class Calendario extends React.Component{
   renderBlocchettoLezione = (item) => {
       
     return(
-      <View>
+      <View style={{marginTop:50}}>
         {item.map(this.graficaLezione)}
         
       </View>
@@ -298,23 +295,23 @@ class Calendario extends React.Component{
             
 
             showClosingKnob={false}
-            theme={{ backgroundColor: {greyBack},
+            theme={{ backgroundColor: colors.greyBack,
               
               calendarBackground: '#fff',
               textSectionTitleColor: '#b6c1cd',
               textSectionTitleDisabledColor: '#d9e1e8',
-              selectedDayBackgroundColor: mediumColor,
+              selectedDayBackgroundColor: colors.mediumColor,
               selectedDayTextColor: '#ffffff',
               todayTextColor: 'red',
               dayTextColor: '#2d4150',
               textDisabledColor: '#d9e1e8',
-              dotColor: mediumColor,
+              dotColor: colors.mediumColor,
               selectedDotColor: '#ffffff',
-              monthTextColor: darkColor,
+              monthTextColor: colors.darkColor,
               indicatorColor: '#333',
-              textDayFontFamily: 'monospace',
-              textMonthFontFamily: 'monospace',
-              textDayHeaderFontFamily: 'monospace',
+              textDayFontFamily: fonts,
+              textMonthFontFamily: fonts,
+              textDayHeaderFontFamily: fonts,
               textDayFontWeight: '300',
               textMonthFontWeight: 'bold',
               textDayHeaderFontWeight: '300',
@@ -337,7 +334,7 @@ class Calendario extends React.Component{
           {
             this.state.isLoading &&
           <View style={styles.loading}>
-            <ActivityIndicator pointerEvents="none" color={darkColor} size='large' animating={this.state.isLoading}/>
+            <ActivityIndicator pointerEvents="none" color={colors.darkColor} size='large' animating={this.state.isLoading}/>
           </View>}
           
 
@@ -365,8 +362,14 @@ const styles = StyleSheet.create({
     marginTop: 17, 
     borderRadius:10, 
     shadowColor: "black",
-    shadowOpacity: 1,
+      shadowOpacity: 0.4,
+      shadowRadius:2,
+      shadowOffset:{width:0,height:3},
     elevation: 5,
+  },
+  stileTestoLezione:{
+    fontFamily: fonts,
+    color:'#000'
   }
 })
 

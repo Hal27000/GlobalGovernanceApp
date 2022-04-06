@@ -1,4 +1,5 @@
 
+import {api} from '../config/config'
 
 let timetableObj = {}
 let listaCorsi = {}
@@ -10,11 +11,10 @@ let terzoAnno = {}
 //fetch della timetable di tutti i corsi  
 const fetchMainCalendar = (async () => {
       
-  const response = await fetch('https://economia.uniroma2.it/ba/globalgovernance/dida/orariolezioni/?formato=json')
-  //const econResponse = await fetch('https://economia.uniroma2.it/en/eco/corso/lezioni_json/1508')
+  const response = await fetch(api)
+  
   const result = await response.json()
-  //console.log(result.jsonlezioni)
-  //const risultato = await econResponse.json()
+ 
      
   
   timetableObj = await result.jsonlezioni
