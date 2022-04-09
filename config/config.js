@@ -1,16 +1,19 @@
-
-
 const colors = {
     lightColor: "#e6ffcc",
     mediumColor : "#4d9900",
     darkColor : "#006600",
-    greyBack : "#f2f2f2"
+
+    greyBack : "#f2f2f2",
+
+    economiaColor:"#990033",
+    tvColor:"#007c34",
+    delphiGreenColor:'#2d7c5f'
 }
 
 const fonts = 'Roboto'
 
 const course = {
-    type: "BACHELOR DEGREE IN",
+    type: "Bachelor Degree",
     name: "GLOBAL GOVERNANCE",
     years: 3
 }

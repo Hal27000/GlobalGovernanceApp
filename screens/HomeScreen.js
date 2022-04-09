@@ -12,7 +12,7 @@ import React from 'react';
 
 
 
-
+let marginSize = 2
 
 
 function HomeScreen() {
@@ -20,7 +20,10 @@ function HomeScreen() {
   const { height, width } = useWindowDimensions(); 
   let iconSize = 36;
   let buttonFontSize = 14;
-  let courseTitleSize = 26;
+  let courseTitleSize = 36;
+
+  
+  let squareSize = 173
 
   if (PixelRatio.get() <2){
     iconSize=18
@@ -50,62 +53,106 @@ function HomeScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container]}>
       <StatusBar barStyle="light-content" backgroundColor={colors.mediumColor}/>
 
       
+      {/* blocco Ateneo + Economia */}
+        <View style={{ flexDirection:'row'}}>
 
-      <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'green'}, styles.pressabili]}
-          onPress={()=>WebBrowser.openBrowserAsync('http://web.uniroma2.it/')}>
-            <View style={styles.viste}>
-                <Image source={require('../assets/due-en.png')} resizeMode='center' style={{ height:65}} /> 
-            </View>  
-      </Pressable>
-            
-      <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'white'}, styles.pressabili]}
-          onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/')}>
-            <View style={styles.viste}>
-                <Image source={require('../assets/economia-en.png')} resizeMode='center' style={{ height:90}} />
-            </View>
-      </Pressable>
-    
-        <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'white'}, styles.pressabili]}
-          onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance')}>
-            <View style={styles.viste}>
-                <View>
-                  <Text style={styles.testo}>{course.type}</Text>
-                  <Text style={[styles.testo,{fontSize:courseTitleSize}]}>{course.name}</Text>
+          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : colors.tvColor}, styles.pressabili]}
+                onPress={()=>WebBrowser.openBrowserAsync('http://web.uniroma2.it/')}>
+                  <View style={styles.viste}>
+                    <Image source={require('../assets/logo_tv.png')} style={{ height:squareSize, width:squareSize}} />
+                    <View style={{position:'absolute', bottom:0, right:0, margin:10, color:'white'}}>
+                      <Text style={styles.testoBottoni}>Tor Vergata</Text>
+                      <Text style={styles.testoBottoni}>University</Text>
+                    </View>
                   
+                  </View>  
+          </Pressable>
+                
+          <Pressable style={({pressed}) => [{backgroundColor: pressed ? 'blue' : colors.economiaColor}, styles.pressabili]}
+              onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/')}>
+                
+                    
+                    <Image source={require('../assets/logo_eco.png')} style={{ height:squareSize, width:squareSize}} />
+                    <View style={{position:'absolute', bottom:0, right:0, margin:10, color:'white'}}>
+                      <Text style={styles.testoBottoni}>School of</Text>
+                      <Text style={styles.testoBottoni}>Economics</Text>
+                    </View>
+                
+          </Pressable>
+
+        </View>
+
+      {/* ---------------------------------------------------------------------------------- */}
+
+      {/* blocco corso di Laurea */}
+
+        <View>
+
+          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : colors.mediumColor}, styles.pressabili]}
+              onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance')}
+              onLongPress={()=>Alert.alert('Alessio Huma')}>
+                <View style={{ height:(squareSize*2)+marginSize*2, width:(squareSize*2)+marginSize*2, justifyContent:'center'}}>
+                    
+                <View style={{marginLeft:20}}>
+                  
+                  <Text style={[styles.testoCorso,{fontSize:courseTitleSize}]}>GLOBAL</Text>
+                  <Text style={[styles.testoCorso,{fontSize:courseTitleSize}]}>GOVERNANCE</Text>
                 </View>
-            </View>
-      </Pressable>
+                      
+                <View style={{position:'absolute', bottom:0, right:0, margin:10, color:'white'}}>
+                      <Text style={styles.testoBottoni}>Bachelor</Text>
+                      <Text style={styles.testoBottoni}>Degree</Text>
+                    </View>
+                </View>
+          </Pressable>        
 
-      <View style={[styles.viste,{flex:3, justifyContent:'center'}]}>
-
-        <View style={{flex:1, flexDirection:"row", paddingVertical:10}}>
-          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'white'}, styles.blocchettoLezione]} 
-          onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/dida/courses')} >
-            <MaterialCommunityIcons name="book-open-page-variant" color={colors.mediumColor} size={iconSize} />
-            <Text style={{fontFamily:'sans-serif-light', fontSize:buttonFontSize}}>Courses</Text>
-          </Pressable>
-
-          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'white'},{marginHorizontal:20}, styles.blocchettoLezione]} 
-          onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance/programme-structure/')} >
-          <MaterialCommunityIcons name="table" color={colors.mediumColor} size={iconSize} />
-            <Text style={{fontFamily:'sans-serif-light', fontSize:buttonFontSize}}>Programme Structure</Text>
-          </Pressable>
-
-          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : 'white'}, styles.blocchettoLezione]} 
-          onPress={()=>WebBrowser.openBrowserAsync('https://delphi.uniroma2.it/totem/jsp/homeStudenti.jsp?language=EN')} >
-          <Ionicons name="person" size={iconSize} color={colors.mediumColor} />
-            <Text style={{fontFamily:'sans-serif-light', fontSize:buttonFontSize}}>Students Delphi</Text>
-          </Pressable>
         </View>
-       
-        <View style={{flex:2}}>
+
+      {/* ---------------------------------------------------------------------------------- */}
+
+
+      {/* blocchetto Delphi e QuickLinks */}
+        <View style={{ flexDirection:'row'}}>  
+
+          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : '#e6e6dc'}, styles.pressabili]}
+              onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/linktree')}>
+                <View style={styles.viste}>
+                  <Image source={require('../assets/logo_linktree.png')} style={{ height:squareSize, width:squareSize}} />
+                  <View style={{position:'absolute', bottom:0, right:0, margin:10, color:'white'}}>
+                      <Text style={[styles.testoBottoni,{color:colors.economiaColor}]}>@economia</Text>
+                      <Text style={[styles.testoBottoni,{color:colors.economiaColor}]}>torvergata</Text>
+                    </View>
+                </View>
+          </Pressable>     
+
+          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : colors.delphiGreenColor}, styles.pressabili]}
+              onPress={()=>WebBrowser.openBrowserAsync('https://delphi.uniroma2.it/totem/jsp/homeStudenti.jsp?language=EN')}>
+                <View style={styles.viste}>
+                    <View>
+                    <Image source={require('../assets/delphi.png')} style={{ height:squareSize, width:squareSize}} />
+
+                    <View style={{position:'absolute', bottom:0, right:0, margin:10, color:'white'}}>
+                      <Text style={styles.testoBottoni}>Student's</Text>
+                      <Text style={styles.testoBottoni}>Delphi</Text>
+                    </View>
+                    </View>
+                </View>
+          </Pressable>
+
+          
+
+          
+
+        </View>         
+      {/*<View style={{flex:2}}>
           <AndroidFonts></AndroidFonts>
-        </View>
-      </View> 
+      </View> */}
+        
+      
 
       
                
@@ -116,41 +163,32 @@ function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    padding:20
+    padding:5,
+    backgroundColor:'white',
+    alignItems:'center'
   },
-  pressabili:{
-      flex:1,
-      shadowColor: "black",
+  pressabili:{      
+      elevation:2,
+      shadowColor: "#000",
       shadowOpacity: 0.4,
       shadowRadius:2,
-      shadowOffset:{width:0,height:3},
+      shadowOffset:{width:0,height:3},      
+      margin:marginSize,
+      borderRadius:10,  
+  },
+  viste:{   
       
-      marginBottom:20,
-      borderRadius:5,
-      elevation:10
   },
-  viste:{
-      justifyContent:'center',
-      alignItems:'center',
-      flex:1
+  testoCorso:{
+    color:'white',
+    fontFamily:'sans-serif-light',
+    fontSize:60
   },
-  testo:{
-    color:'green',
-    fontFamily:'Quattrocento_400Regular'
-  },
-  blocchettoLezione: {
-    
-   
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center', 
-    borderRadius:10, 
-    shadowColor: "black",
-    shadowOpacity: 0.4,
-    shadowRadius:2,
-    shadowOffset:{width:0,height:3},
-    elevation: 5,
-  }  
+  testoBottoni:{
+    textAlign:'right',
+    color:'white',
+    fontFamily:'sans-serif-light'
+  }
 });
 
 export {HomeScreen}

@@ -5,8 +5,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {LocaleConfig} from 'react-native-calendars';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Ionicons } from '@expo/vector-icons';
+
 import {HomeScreen} from './screens/HomeScreen'
 import {LinkScreen} from './screens/LinkScreen';
+import { CourseScreen } from './screens/CourseScreen';
 import {CalendarListScreen} from './screens/CalendarListScreen'
 import {LectureDetailsScreen} from './screens/LectureDetailsScreen'
 import { colors } from './config/config';
@@ -81,56 +84,47 @@ function App() {
         />
 
         
-
         <Tab.Screen name="Timetable" component={TimetableScreen}
-
-          options={({ navigation }) => ({
-                      
+          options={({ navigation }) => ({                      
             tabBarIcon: ({ focused, color }) => {
-
               let iconName;
-              if (focused){
-                iconName = 'clock-time-ten'
-              }else{
-                iconName = 'clock-time-ten-outline'
-              }
-
-
-              return <MaterialCommunityIcons name={iconName} color={color} size={26} />
+              if (focused){iconName = 'calendar'}else{iconName = 'calendar-outline'}
+              return <Ionicons name={iconName} size={24} color={color} />
             },
             tabBarStyle:{
               position: 'absolute',
-              backgroundColor: '#ffffffe6',
-              
+              backgroundColor: '#ffffffe6',              
               elevation:0
             }
           })}
-          
-          
         />
+        
 
-        <Tab.Screen name="News" component={LinkScreen}
-
-
-          
-
-          options={({ navigation }) => ({
-                      
+        <Tab.Screen name="Courses" component={CourseScreen}
+          options={({ navigation }) => ({                      
             tabBarIcon: ({ focused, color }) => {
-
               let iconName;
-              if (focused){
-                iconName = 'newspaper-variant'
-              }else{
-                iconName = 'newspaper-variant-outline'
-              }
-
-
-              return <MaterialCommunityIcons name={iconName} color={color} size={26} />
+              if (focused){iconName = 'library'}else{iconName = 'library-outline'}
+              return <Ionicons name={iconName} size={26} color={color} />
             },
             unmountOnBlur:true
           })}
         />
+
+        {/*<Tab.Screen name="QuickLinks" component={LinkScreen}
+          options={({ navigation }) => ({                      
+            tabBarIcon: ({ focused, color }) => {
+              let iconName;
+              if (focused){iconName = 'newspaper-variant'}else{iconName = 'newspaper-variant-outline'}
+              return <MaterialCommunityIcons name={iconName} color={color} size={26} />
+            },
+            unmountOnBlur:true
+          })}
+        /> */}
+
+        
+
+        
 
 
       </Tab.Navigator>

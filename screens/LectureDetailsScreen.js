@@ -10,49 +10,76 @@ import { colors, sigla, fonts } from '../config/config';
 
 
 function LectureDetailsScreen({route}){
-  const {nomeCorso, data, courseId} = route.params
+  const {nomeCorso, data, courseId, aula, nomeDocente} = route.params
   
-  console.log(typeof(listaCorsi))
+  //console.log(typeof(listaCorsi))
   
   while (listaCorsi[courseId] === undefined){return <Text>Ciao</Text>}
+
+  console.log(listaCorsi[courseId].corso.btnpresenza)
 
 
   return(
     <View style={{flex:1}}>
       <StatusBar barStyle="light-content" backgroundColor={colors.mediumColor} />
 
-      <View style={{padding:10, backgroundColor:"white", shadowColor:'black', elevation:5}}>
+      <View style={{ backgroundColor:"white", shadowColor:'black', elevation:5}}>
               
-        {/*Titolo*/}                     
-        <Text style={{fontSize:24, fontWeight:'bold', marginTop:10, marginBottom:5}}>
-            {nomeCorso}
-        </Text>
+        {/*Titolo*/} 
+
+          <View style={{margin:10, marginBottom:5}}>
+
+            <Text style={{fontSize:24, fontWeight:'bold'}}>
+                {listaCorsi[courseId].corso.NAME}                
+            </Text>
+            <Text>
+                {listaCorsi[courseId].corso.TITOLARE}
+            </Text>
+
+
+          </View>                    
+          
           
 
-        {/* riga pulsanti */}
-        <View style={{ flexDirection:'row', alignItems:'center', marginTop:10, marginBottom:10}}>
+        {/* riga pulsanti mini */}
+          <View style={{ flexDirection:'row', alignItems:'center', marginBottom:10}}>
 
-          {/* pulsante Course Page*/}
-          <Pressable style={({ pressed }) => [{backgroundColor: pressed ? colors.darkColor : colors.mediumColor}, styles.pressabili]}
-              onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/'+sigla+'/corso/'+courseId)}>
-                          
-              <Text style={styles.stileTestoBottoni}>Courses Page </Text>
-              <MaterialCommunityIcons name="open-in-new" color={'white'} size={15} />              
-                              
-          </Pressable>
+            {/* pulsante Course Page*/}
+            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? colors.mediumColor : colors.lightColor},  styles.pressabili, styles.flexuno]}
+                onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/'+sigla+'/corso/'+courseId)}>
+                            
+                <Text style={styles.stileTestoBottoni}>Courses Page </Text>
+                <MaterialCommunityIcons name="open-in-new" color={'black'} size={15} />              
+                                
+            </Pressable>
 
-          {/* pulsante Teaching Material*/}
-          <Pressable style={({ pressed }) => [{backgroundColor: pressed ? colors.darkColor : colors.mediumColor}, styles.pressabili]}
+            {/* pulsante Teaching Material*/}
+            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? colors.mediumColor : colors.lightColor},  styles.pressabili, styles.flexuno]}
+                onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/'+sigla+'/corso/materiali/'+courseId)}>
+                            
+                <Text style={styles.stileTestoBottoni}>Teaching Material </Text>
+                <MaterialCommunityIcons name="open-in-new" color={'black'} size={15} />               
+                                
+            </Pressable>                 
+          </View>
+
+        {/* riga pulsanti PRESENZA */}
+          { listaCorsi[courseId].corso.btnpresenza ? 
+            
+            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? colors.darkColor : colors.mediumColor}, styles.pressabili]}
               onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/'+sigla+'/corso/materiali/'+courseId)}>
-                          
-              <Text style={styles.stileTestoBottoni}>Teaching Material </Text>
+                        
+              <Text style={styles.stileTestoBottonePresenze}>Conferma presenza in {aula} </Text>
               <MaterialCommunityIcons name="open-in-new" color={'white'} size={15} />               
-                              
-          </Pressable>
-              
-        </View>
+                            
+            </Pressable>
+            : 
+            <></>
+          }
       </View>
 
+
+      {/* Tabella Orari*/}
       <View style={{ flexBasis:470, flexGrow:1, backgroundColor:colors.greyBack }}>
 
         <ScrollView style={{ paddingHorizontal:10}}>
@@ -63,7 +90,7 @@ function LectureDetailsScreen({route}){
         </ScrollView>
 
       </View>
-      {/* Tabella Orari*/} 
+       
       
       
       
@@ -115,27 +142,31 @@ convertitoreData = (data) => {
   return finalDate
 }
 
-const bottoncini =  {
 
-  
-  
-}
 
-const coloreBottoni = colors.mediumColor
+
 
 const styles = StyleSheet.create({
   pressabili:{
     
     padding:10,
-    marginRight: 10,
+    margin:10,
     borderRadius:5,      
     shadowColor: "black",
     elevation:5,
     flexDirection:'row',
-    alignItems:'center'
+    alignItems:'center',
+    justifyContent:'center'
     
   },
+  flexuno:{
+    flex:1
+  },
   stileTestoBottoni:{
+    color: "black",
+    fontFamily:fonts
+  },
+  stileTestoBottonePresenze:{
     color: "white",
     fontFamily:fonts
   },

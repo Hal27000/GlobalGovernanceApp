@@ -240,7 +240,7 @@ class Calendario extends React.Component{
     }))
     
     
-    this.props.navigation.navigate('LectureDetailsScreen', { courseId: item['corsi_id'], nomeCorso: item['titolo']})
+    this.props.navigation.navigate('LectureDetailsScreen', { courseId: item['corsi_id'], aula: item['luogo'] })
     
   };
 
