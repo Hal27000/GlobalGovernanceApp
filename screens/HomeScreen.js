@@ -44,13 +44,9 @@ function HomeScreen() {
       ]
     ))();
 
-  let [fontsLoaded] = useFonts({
-    'Quattrocento_400Regular':require('../assets/fonts/Quattrocento-Regular.ttf')
-  })
   
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
+  
+  
 
   return (
     <View style={[styles.container]}>
@@ -60,7 +56,7 @@ function HomeScreen() {
       {/* blocco Ateneo + Economia */}
         <View style={{ flexDirection:'row'}}>
 
-          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : colors.tvColor}, styles.pressabili]}
+          <Pressable style={({pressed}) => [{backgroundColor: pressed ? colors.tvColorPressed : colors.tvColor}, styles.pressabili]}
                 onPress={()=>WebBrowser.openBrowserAsync('http://web.uniroma2.it/')}>
                   <View style={styles.viste}>
                     <Image source={require('../assets/logo_tv.png')} style={{ height:squareSize, width:squareSize}} />
@@ -72,7 +68,7 @@ function HomeScreen() {
                   </View>  
           </Pressable>
                 
-          <Pressable style={({pressed}) => [{backgroundColor: pressed ? 'blue' : colors.economiaColor}, styles.pressabili]}
+          <Pressable style={({pressed}) => [{backgroundColor: pressed ? colors.economiaColorPressed : colors.economiaColor}, styles.pressabili]}
               onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/')}>
                 
                     
@@ -92,9 +88,9 @@ function HomeScreen() {
 
         <View>
 
-          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : colors.mediumColor}, styles.pressabili]}
+          <Pressable style={({pressed}) => [{backgroundColor: pressed ? colors.darkColor : colors.mediumColor}, styles.pressabili]}
               onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance')}
-              onLongPress={()=>Alert.alert('Alessio Huma')}>
+              onLongPress={()=>Alert.alert('Alert','Made by Alessio Huma')}>
                 <View style={{ height:(squareSize*2)+marginSize*2, width:(squareSize*2)+marginSize*2, justifyContent:'center'}}>
                     
                 <View style={{marginLeft:20}}>
@@ -118,7 +114,7 @@ function HomeScreen() {
       {/* blocchetto Delphi e QuickLinks */}
         <View style={{ flexDirection:'row'}}>  
 
-          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : '#e6e6dc'}, styles.pressabili]}
+          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#b6b6b6' : '#e6e6dc'}, styles.pressabili]}
               onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/linktree')}>
                 <View style={styles.viste}>
                   <Image source={require('../assets/logo_linktree.png')} style={{ height:squareSize, width:squareSize}} />
@@ -129,7 +125,7 @@ function HomeScreen() {
                 </View>
           </Pressable>     
 
-          <Pressable style={({pressed}) => [{backgroundColor: pressed ? '#f2f2f2' : colors.delphiGreenColor}, styles.pressabili]}
+          <Pressable style={({pressed}) => [{backgroundColor: pressed ? colors.delphiGreenColorPressed : colors.delphiGreenColor}, styles.pressabili]}
               onPress={()=>WebBrowser.openBrowserAsync('https://delphi.uniroma2.it/totem/jsp/homeStudenti.jsp?language=EN')}>
                 <View style={styles.viste}>
                     <View>

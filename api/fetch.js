@@ -11,8 +11,7 @@ let terzoAnno = {}
 //fetch della timetable di tutti i corsi  
 const fetchMainCalendar = (async () => {
       
-  const response = await fetch(api)
-  
+  const response = await fetch(api)  
   const result = await response.json()
  
      
@@ -83,28 +82,18 @@ const fetchMainCalendar = (async () => {
 const fetchCourseCalendar = async (CourseID) => {
   
   
-  //if (listaCorsi[CourseID]){
-    
-  //return listaCorsi
-    
-  //}else{
     
     CourseObject = await fetch("https://economia.uniroma2.it/en/eco/corso/lezioni_json/"+ CourseID).then(response => response.json())
     listaCorsi[CourseID] = CourseObject
-  //}
+  
     
     
 };
 
 
+export {primoAnno, secondoAnno, terzoAnno, timetableObj, listaCorsi, fetchCourseCalendar}
 
 
-
-export {fetchCourseCalendar}
-export {timetableObj}
-export {primoAnno, secondoAnno, terzoAnno}
-
-export {listaCorsi}
 
 /*const esempioFormatoJson = {
   
