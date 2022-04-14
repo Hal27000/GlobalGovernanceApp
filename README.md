@@ -18,6 +18,7 @@ Per vedere se i è già loggati utilizzare
 		eas whoami
 
 Comando per creare la build di Android.
+
 Per maggiori dettagli sul processo e le possibili configurazioni, si veda: https://docs.expo.dev/build/setup/
 
 		eas build -p android --profile development
