@@ -16,8 +16,13 @@ Una volta installato eas, bisognerà loggarsi con il proprio expo account dentro
 Per vedere se i è già loggati utilizzare
 
 		eas whoami
-Dopo essersi loggati, bisogna creare
-Comando per creare la build di Android.
+Dopo essersi loggati, bisogna configurare il progetto per la build. (ATTENZIONE: Nella repo su github la configurazione è già presente).
+
+		eas:build configure
+Questo comando creerà un file eas.json all'interno del progetto che gestisce tutte le settings necessarie al processo di build.
+
+
+Comando per creare la build di Android. (in base alla configurazione già presente della repo)
 
 		eas build -p android --profile development
 		
