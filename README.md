@@ -1,5 +1,12 @@
 # GlobalGovernanceApp
 
+## Configurare l'ambiente di sviluppo
+
+C'è bisogno di node.js ed npm. Installando l'ultima versione di node.js dal sito installerà anche npm
+
+### Installare expo-cli
+		npm install --global expo-cli
+
 Dopo aver scaricato la cartella
 
 Installare tutti i moduli node che compongono l'app. (simile a composer update)
