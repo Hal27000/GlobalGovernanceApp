@@ -11,7 +11,7 @@ import { colors, sigla, fonts } from '../config/config';
 
 function LectureDetailsScreen({route}){
   const {nomeCorso, data, courseId, aula, nomeDocente} = route.params
-  
+  console.log(listaCorsi)
   //console.log(typeof(listaCorsi))
   
   while (listaCorsi[courseId] === undefined){return <Text>Ciao</Text>}
@@ -32,9 +32,13 @@ function LectureDetailsScreen({route}){
             <Text style={{fontSize:24, fontWeight:'bold'}}>
                 {listaCorsi[courseId].corso.NAME}                
             </Text>
-            <Text>
+            {true?(
+              <Text>
                 {listaCorsi[courseId].corso.TITOLARE}
-            </Text>
+              </Text>
+            ):(
+              <></>
+            )}
 
 
           </View>                    

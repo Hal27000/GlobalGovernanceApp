@@ -4,9 +4,9 @@ import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
 import AppLoading from 'expo-app-loading';
 import { colors, course } from "../config/config";
-import { useFonts
-} from '@expo-google-fonts/quattrocento'
-import {AndroidFonts} from '../components/AndroidFonts'
+import * as Network from 'expo-network';
+
+
 
 import React from 'react';
 
@@ -90,7 +90,8 @@ function HomeScreen() {
 
           <Pressable style={({pressed}) => [{backgroundColor: pressed ? colors.darkColor : colors.mediumColor}, styles.pressabili]}
               onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance')}
-              onLongPress={()=>Alert.alert('Alert','Made by Alessio Huma')}>
+              onLongPress={()=>Alert.alert('Secret Message','This app has been proposed and developed by Alessio Huma.\n\nLeave the world better than you found it')}
+              delayLongPress={1000}>
                 <View style={{ height:(squareSize*2)+marginSize*2, width:(squareSize*2)+marginSize*2, justifyContent:'center'}}>
                     
                 <View style={{marginLeft:20}}>
