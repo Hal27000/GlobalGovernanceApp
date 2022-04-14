@@ -91,13 +91,14 @@ function HomeScreen() {
           <Pressable style={({pressed}) => [{backgroundColor: pressed ? colors.darkColor : colors.mediumColor}, styles.pressabili]}
               onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/ba/globalgovernance')}
               onLongPress={()=>Alert.alert('Secret Message','This app has been proposed and developed by Alessio Huma.\n\nLeave the world better than you found it')}
-              delayLongPress={1000}>
+              delayLongPress={10000}>
                 <View style={{ height:(squareSize*2)+marginSize*2, width:(squareSize*2)+marginSize*2, justifyContent:'center'}}>
                     
                 <View style={{marginLeft:20}}>
                   
                   <Text style={[styles.testoCorso,{fontSize:courseTitleSize}]}>GLOBAL</Text>
                   <Text style={[styles.testoCorso,{fontSize:courseTitleSize}]}>GOVERNANCE</Text>
+                  <Text style={{color:'white', fontFamily:'sans-serif-light', fontSize:20}}>Beta</Text>
                 </View>
                       
                 <View style={{position:'absolute', bottom:0, right:0, margin:10, color:'white'}}>
