@@ -7,7 +7,9 @@ Installare tutti i moduli node che compongono l'app. (simile a composer update)
 		npm install
 C'è bisogno di installare EAS (Expo Application Services) per creare la build
 
-## Installazione pacchetti necessari
+## Guida alla creazione della build
+
+### Installazione pacchetti necessari
 
 		npm install -g eas-cli
 Una volta installato eas, bisognerà loggarsi con il proprio expo account dentro il progetto di quale si vuole creare la build
