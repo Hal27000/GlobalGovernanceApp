@@ -1,7 +1,8 @@
 import { View, Text, ScrollView, StatusBar, TouchableHighlight, Pressable, StyleSheet, PixelRatio} from "react-native";
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+//import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { listaCorsi } from '../api/fetch';
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
@@ -16,6 +17,8 @@ function LectureDetailsScreen({route}){
   
   while (listaCorsi[courseId] === undefined){return <Text>Ciao</Text>}
 
+
+  console.log('wewewe')
   console.log(listaCorsi[courseId].corso.btnpresenza)
 
 
@@ -27,12 +30,14 @@ function LectureDetailsScreen({route}){
               
         {/*Titolo*/} 
 
-          <View style={{margin:10, marginBottom:5}}>
+          <View style={{margin:10}}>
 
-            <Text style={{fontSize:24, fontWeight:'bold'}}>
-                {listaCorsi[courseId].corso.NAME}                
-            </Text>
-            {true?(
+            <View style={{flexDirection:'row'}}>
+              <Text style={{fontSize:24, fontWeight:'bold'}}>
+                  {listaCorsi[courseId].corso.NAME}                
+              </Text>
+            </View>
+            {listaCorsi[courseId].corso.TITOLARE?(
               <Text>
                 {listaCorsi[courseId].corso.TITOLARE}
               </Text>
@@ -49,34 +54,40 @@ function LectureDetailsScreen({route}){
           <View style={{ flexDirection:'row', alignItems:'center', marginBottom:10}}>
 
             {/* pulsante Course Page*/}
-            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? colors.mediumColor : colors.lightColor},  styles.pressabili, styles.flexuno]}
+            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? colors.darkColor : colors.mediumColor},  styles.pressabili, styles.flexuno]}
                 onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/'+sigla+'/corso/'+courseId)}>
                             
-                <Text style={styles.stileTestoBottoni}>Courses Page </Text>
-                <MaterialCommunityIcons name="open-in-new" color={'black'} size={15} />              
+                <View style={{ flexDirection:'row', alignItems:'center'}}>
+                  <Text style={styles.stileTestoBottoni}>Course Page </Text>
+                  <Ionicons name="open-outline" color={'white'} size={15} />
+                </View>              
                                 
             </Pressable>
 
             {/* pulsante Teaching Material*/}
-            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? colors.mediumColor : colors.lightColor},  styles.pressabili, styles.flexuno]}
+            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? colors.darkColor : colors.mediumColor},  styles.pressabili, styles.flexuno]}
                 onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/'+sigla+'/corso/materiali/'+courseId)}>
                             
-                <Text style={styles.stileTestoBottoni}>Teaching Material </Text>
-                <MaterialCommunityIcons name="open-in-new" color={'black'} size={15} />               
+                <View style={{ flexDirection:'row', alignItems:'center'}}>
+                  <Text style={styles.stileTestoBottoni}>Teaching Material </Text>
+                  <Ionicons name="open-outline" color={'white'} size={15} />
+                </View>              
                                 
             </Pressable>                 
           </View>
 
-        {/* riga pulsanti PRESENZA */}
+        {/* riga pulsante PRESENZA */}
           { listaCorsi[courseId].corso.btnpresenza ? 
             
-            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? colors.darkColor : colors.mediumColor}, styles.pressabili]}
-              onPress={()=>WebBrowser.openBrowserAsync('https://economia.uniroma2.it/'+sigla+'/corso/materiali/'+courseId)}>
+            <View style={{marginBottom:10}}>
+              <Pressable style={({ pressed }) => [{backgroundColor: pressed ? colors.economiaColorPressed : colors.economiaColor}, styles.pressabili]}
+              onPress={()=>WebBrowser.openBrowserAsync(listaCorsi[courseId].corso.btnpresenza)}>
                         
-              <Text style={styles.stileTestoBottonePresenze}>Conferma presenza in {aula} </Text>
-              <MaterialCommunityIcons name="open-in-new" color={'white'} size={15} />               
+              <Text style={styles.stileTestoBottonePresenze}>Confirm your attendance in {aula} </Text>
+              <Ionicons name="open-outline" color={'white'} size={15} />               
                             
-            </Pressable>
+              </Pressable>
+            </View>
             : 
             <></>
           }
@@ -121,7 +132,7 @@ grafica = (lezione) =>{
       </View>
 
       {/*Blocchetto Orario */}
-      <View style={{flexDirection:'row', flex:1, alignContent:'center',  alignItems: 'center', margin:10}}>
+      <View style={{flexDirection:'row', flex:1.5,  alignItems: 'center'}}>
         <MaterialCommunityIcons name="clock-outline" color={"grey"} size={18} />
         <Text style={styles.stileTestoLezioni}> {lezione['orarioinizio'].slice(0,2)+":"+lezione['orarioinizio'].slice(2)}</Text>
         <Text style={styles.stileTestoLezioni}> - </Text>
@@ -129,9 +140,9 @@ grafica = (lezione) =>{
       </View>
 
       {/*Blocchetto Aula */}
-      <View style={{ flexDirection:'row', flex:1, margin:10, alignContent:'center',  alignItems: 'center'}}>
+      <View style={{ flexDirection:'row', flex:1, margin:10, alignItems: 'center'}}>
         <MaterialCommunityIcons name="door-open" color={"grey"} size={18} />
-        <Text style={styles.stileTestoLezioni}> {lezione['DESCRIPTION'] === 'Lezione online'?'Online lecture':lezione['DESCRIPTION']}</Text>
+        <Text style={styles.stileTestoLezioni}> {lezione['DESCRIPTION']}</Text>
       </View>
       
     </View>
@@ -154,7 +165,8 @@ const styles = StyleSheet.create({
   pressabili:{
     
     padding:10,
-    margin:10,
+    marginHorizontal:10,
+    
     borderRadius:5,      
     shadowColor: "black",
     elevation:5,
@@ -167,7 +179,7 @@ const styles = StyleSheet.create({
     flex:1
   },
   stileTestoBottoni:{
-    color: "black",
+    color: "white",
     fontFamily:fonts
   },
   stileTestoBottonePresenze:{
@@ -183,7 +195,8 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     margin:5,
     borderRadius:5,
-    padding:10,
+    paddingVertical:10,
+    paddingHorizontal:10,
     shadowColor: "black",
     elevation:5,
     

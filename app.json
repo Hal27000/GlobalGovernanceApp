@@ -1,6 +1,7 @@
 {
   "expo": {
-    "name": "Global Governance",
+    "jsEngine": "hermes",
+    "name": "Global Governance - Beta",
     "slug": "GlobalGovernance",
     "version": "0.9.0",
     "orientation": "portrait",

@@ -5,7 +5,7 @@ import { primoAnno, secondoAnno, terzoAnno, timetableObj } from '../api/fetch';
 import FloatingButton from './FloatingButton'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { lightColor, colors, fonts } from '../config/config';
+import { colors, fonts } from '../config/config';
 
 
 import { fetchCourseCalendar } from '../api/fetch';
@@ -42,11 +42,9 @@ class Calendario extends React.Component{
 
   loadItems = (day) => {
   
-      console.log("funzione loadItems partita")
+      //console.log("funzione loadItems partita")
       
-      console.log(day)
-
-      console.log('-----------------------------------')
+      
 
       this.setState({currentDate: day})
   
@@ -161,7 +159,7 @@ class Calendario extends React.Component{
     return(
       <View>
 
-        <Pressable onPress={()=>{this.funzionedilancio(item)
+        <Pressable onPress={()=>{this.onPressSlotSingoloCorso(item)
                                 this.setState(prevState =>({
               isLoading: !prevState.isLoading
         }))}} 
@@ -181,29 +179,42 @@ class Calendario extends React.Component{
 
 
             {/* spazio orario, aula, lezione */}
-            <View style={{padding:12, backgroundColor:'#fff', borderBottomRightRadius:10, borderBottomLeftRadius:10}}>
+            <View style={{padding:12, backgroundColor:'#fff', borderBottomRightRadius:10, borderBottomLeftRadius:10, flexDirection:'row'}}>
 
-              <View style={{flexDirection:'row'}}>
-                <MaterialCommunityIcons name="clock-outline" color={"grey"} size={20} />
-                <Text style={styles.stileTestoLezione}>
-                    {'  '+item['whenst'].slice(0,2)+":"+item['whenet'].slice(2) + " - " +item['whenet'].slice(0,2)+":"+item['whenet'].slice(2)}
-                </Text>
+              <View style={{flex:1}}>
+
+                <View style={{flexDirection:'row'}}>
+                  <MaterialCommunityIcons name="clock-outline" color={"grey"} size={20} />
+                  <Text style={styles.stileTestoLezione} adjustsFontSizeToFit={true}>
+                      {'  '+item['whenst'].slice(0,2)+":"+item['whenet'].slice(2) + " - " +item['whenet'].slice(0,2)+":"+item['whenet'].slice(2)}
+                  </Text>
+
+                </View>
+
+                
 
               </View>
 
-              <View style={{flexDirection:'row'}}>
-                <MaterialCommunityIcons name="door-open" color={"grey"} size={20} />
-                <Text style={styles.stileTestoLezione}>
-                  {item['luogo']==='Lezione online'?'  Online lecture':'  '+item['luogo']}
-                </Text>
+              <View style={{flex:1}}>
+
+                <View style={{flexDirection:'row', justifyContent:'flex-end'}}>
+                  <MaterialCommunityIcons name="account-multiple" color={"grey"} size={20} />
+                  <Text style={styles.stileTestoLezione}>
+                    {'  '+item['categoria']}
+                  </Text>
+                </View>
+                <View style={{flexDirection:'row', justifyContent:'flex-end'}}>
+                  <MaterialCommunityIcons name="door-open" color={"grey"} size={20} />
+                  <Text style={styles.stileTestoLezione}>
+                    {'  '+item['luogo']}
+                  </Text>
+                </View>
+
               </View>
 
-              <View style={{flexDirection:'row'}}>
-                <MaterialCommunityIcons name="account-multiple" color={"grey"} size={20} />
-                <Text style={styles.stileTestoLezione}>
-                  { item['categoria']==='Lezione'?'  Lecture' : item['categoria']==='Esercitazione'?'  Practice':'  '+item['categoria']}
-                </Text>
-              </View>
+              
+
+              
 
             </View>
 
@@ -226,19 +237,13 @@ class Calendario extends React.Component{
        
   }
 
-  async funzionedilancio(item) {
-
-    
-    
-    
-    
+  onPressSlotSingoloCorso= async (item) => {    
     
     await fetchCourseCalendar(item['corsi_id'])
-    
+
     this.setState(prevState =>({
       isLoading: !prevState.isLoading
     }))
-    
     
     this.props.navigation.navigate('LectureDetailsScreen', { courseId: item['corsi_id'], aula: item['luogo'] })
     

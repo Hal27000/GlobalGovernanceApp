@@ -2,17 +2,24 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import {LocaleConfig} from 'react-native-calendars';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Ionicons } from '@expo/vector-icons';
 
+//Screens
 import {HomeScreen} from './screens/HomeScreen'
-import {LinkScreen} from './screens/LinkScreen';
 import { CourseScreen } from './screens/CourseScreen';
 import {CalendarListScreen} from './screens/CalendarListScreen'
 import {LectureDetailsScreen} from './screens/LectureDetailsScreen'
+
+
+//Icons and Colors
+
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { colors } from './config/config';
+import AppLoading from 'expo-app-loading';
+
+import { checkConnection} from "./api/fetch"
+import { NoConnectionScreen } from './screens/NoConnectionScreen';
+
 
 
 
@@ -44,28 +51,50 @@ function TimetableScreen({navigation}) {
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const baba = 5
 
 
-function App() {
+
+export default function App() {
+
+  const [isLoading, setIsLoading] = React.useState(true)
+  const [connection, setConnection] = React.useState(true)
+
+  try {
+    checkConnection().then(res=>{
+      console.log(res)
+      setConnection(res)
+      console.log('App sta controllando')
+      setIsLoading(false)
+    })
+  } catch (error) {
+    console.log(error)
+  }
+
+  if(isLoading){
+    return(
+      <AppLoading></AppLoading>
+
+      
+    )
+  }
   return (
     <NavigationContainer>
+
       <Tab.Navigator
-        initialRouteName="Global Governance"
+        initialRouteName="Home"
         
         screenOptions={{
-          tabBarActiveTintColor:colors.mediumColor,
-          tabBarInactiveTintColor:'grey',
-          //tabBarActiveBackgroundColor:'#f2f2f2cc',
+          tabBarActiveTintColor:colors.economiaColor,
+          tabBarInactiveTintColor:'grey',          
           tabBarActiveBackgroundColor:'transparent',
+          
           headerShown:false
           
         }}
+      >
           
-        
-        
-        >
-          
-        <Tab.Screen name="Global Governance" component={HomeScreen} 
+        <Tab.Screen name="Home" component={connection?HomeScreen:NoConnectionScreen} 
           options={({ navigation }) => ({
             
             tabBarIcon: ({ focused, color }) => {
@@ -78,7 +107,7 @@ function App() {
               }
 
 
-              return <MaterialCommunityIcons name={iconName} color={color} size={26} />
+              return <Ionicons name={iconName} color={color} size={26} />
             }
           })}
         />
@@ -89,13 +118,15 @@ function App() {
             tabBarIcon: ({ focused, color }) => {
               let iconName;
               if (focused){iconName = 'calendar'}else{iconName = 'calendar-outline'}
-              return <Ionicons name={iconName} size={24} color={color} />
+              return <Ionicons name={iconName} size={26} color={color} />
             },
             tabBarStyle:{
+              
               position: 'absolute',
               backgroundColor: '#ffffffe6',              
               elevation:0
-            }
+            },
+            tabBarActiveTintColor:colors.economiaColor
           })}
         />
         
@@ -107,25 +138,10 @@ function App() {
               if (focused){iconName = 'library'}else{iconName = 'library-outline'}
               return <Ionicons name={iconName} size={26} color={color} />
             },
+            tabBarActiveTintColor:colors.economiaColor,
             unmountOnBlur:true
           })}
         />
-
-        {/*<Tab.Screen name="QuickLinks" component={LinkScreen}
-          options={({ navigation }) => ({                      
-            tabBarIcon: ({ focused, color }) => {
-              let iconName;
-              if (focused){iconName = 'newspaper-variant'}else{iconName = 'newspaper-variant-outline'}
-              return <MaterialCommunityIcons name={iconName} color={color} size={26} />
-            },
-            unmountOnBlur:true
-          })}
-        /> */}
-
-        
-
-        
-
 
       </Tab.Navigator>
     </NavigationContainer>
@@ -142,11 +158,4 @@ LocaleConfig.locales['it'] = {
 };
 LocaleConfig.defaultLocale = 'it';*/
 
-const styles = StyleSheet.create({
-  tabNavigatorBackground:{
-    backgroundColor: 'transparent',
-    position:'relative'
-  }
-})
 
-export default App;

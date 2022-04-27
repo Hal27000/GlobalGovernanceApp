@@ -6,9 +6,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {colors} from '../config/config'
 
 
-
-
-
 function CourseScreen() {
 
   const webViewRef = React.useRef(null)
@@ -45,7 +42,7 @@ function CourseScreen() {
           />
 
           { !isLoaded ?
-            <ProgressBar progress={progress} width={400} borderWidth={0} />
+            <ProgressBar progress={progress} width={400} borderWidth={0} color={colors.darkColor} />
             : null
           }
           
