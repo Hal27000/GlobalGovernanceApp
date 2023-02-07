@@ -5,10 +5,8 @@ import React from 'react';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { listaCorsi } from '../api/fetch';
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-
 import { course,  fonts, AppContext } from '../config/config';
 import { colors } from '../config/colors'
-import { borderLeftColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 
 

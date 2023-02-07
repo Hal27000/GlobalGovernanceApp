@@ -1,5 +1,5 @@
 import { View, StatusBar, StyleSheet, useWindowDimensions, PixelRatio, Text} from "react-native";
-import { course, AppContext } from "../config/config";
+import { AppContext } from "../config/config";
 import { colors } from '../config/colors'
 import {CustomButton} from "../components/CustomButton"
 import {useContext} from 'react'
@@ -11,8 +11,6 @@ let marginSize = 4
 function HomeScreen({navigation, props}) { 
 
   const context = useContext(AppContext)
-
-  const { height, width } = useWindowDimensions(); 
   console.log( PixelRatio.get())  
 
   return (

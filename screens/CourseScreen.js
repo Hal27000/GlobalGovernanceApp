@@ -29,6 +29,8 @@ function CourseScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <StatusBar barStyle="light-content" backgroundColor={context[0].darkColor} />
+
+        
         
         <View>
           <WebView ref={webViewRef} source={{uri:'https://economia.uniroma2.it/'+context[0].api+'/dida/courses'}}
@@ -87,6 +89,8 @@ const stileBottoni = {
   borderColor:'white'
   
 }
+
+
 
 export {CourseScreen}
 
