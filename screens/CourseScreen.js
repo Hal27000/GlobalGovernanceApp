@@ -3,10 +3,12 @@ import React, { useState} from 'react';
 import { WebView } from 'react-native-webview';
 import ProgressBar from 'react-native-progress/Bar';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {colors} from '../config/config'
+import {course, AppContext} from '../config/config'
 
 
 function CourseScreen() {
+
+  const context = React.useContext(AppContext)
 
   const webViewRef = React.useRef(null)
   
@@ -26,12 +28,10 @@ function CourseScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <StatusBar barStyle="light-content" backgroundColor={colors.mediumColor} />
-
-
+        <StatusBar barStyle="light-content" backgroundColor={context[0].darkColor} />
         
         <View>
-          <WebView ref={webViewRef} source={{uri:'https://economia.uniroma2.it/ba/globalgovernance/dida/courses'}}
+          <WebView ref={webViewRef} source={{uri:'https://economia.uniroma2.it/'+context[0].api+'/dida/courses'}}
             style={{ width:400}}
             onLoadProgress={({nativeEvent})=> setProgress(nativeEvent.progress)}
             onLoadStart={()=>setLoaded(false)}
@@ -42,13 +42,13 @@ function CourseScreen() {
           />
 
           { !isLoaded ?
-            <ProgressBar progress={progress} width={400} borderWidth={0} color={colors.darkColor} />
+            <ProgressBar progress={progress} width={400} borderWidth={0} color={context[0].darkColor} />
             : null
           }
           
           <View style={{flexDirection:'row'}}>
 
-            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? 'red' : colors.mediumColor}, stileBottoni]} onPress={goback}>
+            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? context[0].darkColor : context[0].mediumColor}, stileBottoni]} onPress={goback}>
               <View style={{alignItems:'center', alignContent:'center'}}>
                 <MaterialCommunityIcons name="arrow-left" color={iconColor} size={iconSize} />
                 <Text style={{color:iconColor}}>Go Back</Text>
@@ -56,7 +56,7 @@ function CourseScreen() {
               </View>
             </Pressable>
 
-            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? 'red' : colors.mediumColor}, stileBottoni]} onPress={goforward}>
+            <Pressable style={({ pressed }) => [{backgroundColor: pressed ? context[0].darkColor : context[0].mediumColor}, stileBottoni]} onPress={goforward}>
               <View style={{alignItems:'center', alignContent:'center'}}>
                 <MaterialCommunityIcons name="arrow-right" color={iconColor} size={iconSize} />
                 

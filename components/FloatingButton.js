@@ -1,7 +1,7 @@
 import React from "react";
 import {View, Text, StyleSheet, Animated, TouchableHighlight, Pressable} from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {colors, course, fonts} from '../config/config'
+import {course, fonts} from '../config/config'
 
 export default class FloatingButton extends React.Component{
     animation = new Animated.Value(0);
@@ -9,7 +9,6 @@ export default class FloatingButton extends React.Component{
     toggleMenu = (n,cambio) => {
 
         const toValue = this.open ? 0 : 1;
-
         Animated.spring(this.animation,{
             toValue,
             friction: 5,
@@ -17,21 +16,15 @@ export default class FloatingButton extends React.Component{
         }).start();
 
         this.open= !this.open;
-
-        console.log("ciao")
-
-        if(cambio && n > 0)this.props.funzione(n)
-
-        
+        if(cambio && n > 0)this.props.funzione(n)        
     };
 
     
 
     render(){
-        const firstYear = {
+        const firstPlace = {
             transform: [
-                {scale: this.animation},
-                {
+                {scale: this.animation},{
                     translateY: this.animation.interpolate({
                         inputRange: [0,1],
                         outputRange:[0,-260]
@@ -40,10 +33,8 @@ export default class FloatingButton extends React.Component{
             ]
         };
 
-       
 
-
-        const secondYear = {
+        const secondPlace = {
             transform: [
                 {scale: this.animation},
                 {
@@ -56,7 +47,7 @@ export default class FloatingButton extends React.Component{
         };
 
 
-        const thirdYear = {
+        const thirdPlace = {
             transform: [
                 {scale: this.animation},
                 {
@@ -81,16 +72,11 @@ export default class FloatingButton extends React.Component{
         };
 
         const rotation = {
-            transform: [
-
-                {
-                    rotate: this.animation.interpolate({
-                        inputRange: [0,1],
-                        outputRange: ["0deg","90deg"]
-                    })
-                }
-
-                
+            transform: [{
+                rotate: this.animation.interpolate({
+                    inputRange: [0,1],
+                    outputRange: ["0deg","90deg"]
+                })}                
             ]
         };
 
@@ -106,39 +92,35 @@ export default class FloatingButton extends React.Component{
             <View style={[styles.container, this.props.style]}>
 
 
-                    <Animated.View style={[styles.button, styles.secondary, firstYear, opacity]}>
-                        <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : colors.lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(1,true)}}>
+
+                    {this.props.contesto.years==3?<Animated.View style={[styles.button, styles.secondary, firstPlace, opacity, {backgroundColor: this.props.contesto.lightColor}]}>
+                        <Pressable android_ripple={{color:underlay}} style={[styles.secondary,{backgroundColor: this.props.contesto.lightColor}]} onPress={()=>{this.toggleMenu(1,true)}}>
                             <Text style={styles.textButton}>1° Year</Text>
                         </Pressable>
-                    </Animated.View>
+                    </Animated.View>:<></>}
 
                     
 
-                    <Animated.View style={[styles.button, styles.secondary, secondYear, opacity]}>
-                        <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : colors.lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(2,true)}}>
-                            <Text style={styles.textButton}>2° Year</Text>
+                    <Animated.View style={[styles.button, styles.secondary, secondPlace, opacity, {backgroundColor: this.props.contesto.lightColor}]}>
+                        <Pressable android_ripple={{color:underlay}} style={[styles.secondary,{backgroundColor: this.props.contesto.lightColor}]} onPress={()=>{this.toggleMenu((this.props.contesto.years==3?2:1),true)}}>
+                            <Text style={styles.textButton}>{this.props.contesto.years==3?"2° Year":"1° Year"}</Text>
                         </Pressable>
                     </Animated.View>
 
-
-                    <Animated.View style={[styles.button, styles.secondary, thirdYear, opacity]}>
-                        <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : colors.lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(3,true)}}>
-                            <Text style={styles.textButton}>3° Year</Text>
+                    <Animated.View style={[styles.button, styles.secondary, thirdPlace, opacity, {backgroundColor: this.props.contesto.lightColor}]}>
+                        <Pressable android_ripple={{color:underlay}} style={[styles.secondary,{backgroundColor: this.props.contesto.lightColor}]} onPress={()=>{this.toggleMenu((this.props.contesto.years==3?3:2),true)}}>
+                            <Text style={styles.textButton}>{this.props.contesto.years==3?"3° Year":"2° Year"}</Text>
                         </Pressable>
-                    </Animated.View>
-
-        
+                    </Animated.View>        
                     
-                    <Animated.View style={[styles.button, styles.secondary, allYears, opacity]}>
-                        <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : colors.lightColor}, styles.secondary]} onPress={()=>{this.toggleMenu(4,true)}}>
+                    <Animated.View style={[styles.button, styles.secondary, allYears, opacity, {backgroundColor: this.props.contesto.lightColor}]}>
+                        <Pressable android_ripple={{color:underlay}} style={ [styles.secondary,{backgroundColor: this.props.contesto.lightColor}]} onPress={()=>{this.toggleMenu(4,true)}}>
                             <Text style={styles.textButton}>All Courses</Text>
                         </Pressable>
-                    </Animated.View>
-                
-                
+                    </Animated.View>               
 
-                <Animated.View style={[styles.button, styles.menu, rotation]}>
-                    <Pressable style={({ pressed }) => [{backgroundColor: pressed ? underlay : colors.lightColor}, styles.menu, styles.button]} onPress={()=>{this.toggleMenu(0)}}>
+                <Animated.View style={[styles.button, styles.menu, rotation, {overflow:"hidden", backgroundColor: this.props.contesto.lightColor}]}>
+                    <Pressable android_ripple={{color:underlay}} style={[ styles.menu, styles.button, {backgroundColor: this.props.contesto.lightColor}]} onPress={()=>{this.toggleMenu(0)}}>
                         <MaterialCommunityIcons name="menu" color={"grey"} size={26} />
                     </Pressable>
                 </Animated.View>
@@ -148,7 +130,7 @@ export default class FloatingButton extends React.Component{
     }
 }
 
-const underlay = 'white'
+const underlay = 'grey'
 
 const styles = StyleSheet.create({
 
@@ -178,9 +160,11 @@ const styles = StyleSheet.create({
     menu: {
         width:60,
         height:60,
-        borderRadius: 10
+        borderRadius: 10,
+        
     },
     secondary:{
+        overflow:"hidden",
         alignItems: "center",
         justifyContent: "center",
         width: 100,

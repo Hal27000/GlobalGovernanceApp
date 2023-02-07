@@ -3,6 +3,7 @@ import React, { useState} from 'react';
 import { WebView } from 'react-native-webview';
 import ProgressBar from 'react-native-progress/Bar';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { course } from "../config/config";
 
 
 
@@ -28,7 +29,7 @@ function LinkScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <StatusBar barStyle="light-content" backgroundColor='#990033' />
+        <StatusBar barStyle="light-content" backgroundColor={course.darkColor} />
 
 
         

@@ -1,26 +1,22 @@
-import { View, StatusBar, StyleSheet, useWindowDimensions, PixelRatio} from "react-native";
-import { colors, course } from "../config/config";
+import { View, StatusBar, StyleSheet, useWindowDimensions, PixelRatio, Text} from "react-native";
+import { colors, course, AppContext } from "../config/config";
 import {CustomButton} from "../components/CustomButton"
+import {useContext} from 'react'
+
 
 let marginSize = 4
 
 
-function HomeScreen() { 
+function HomeScreen({navigation, props}) { 
 
+  const context = useContext(AppContext)
 
   const { height, width } = useWindowDimensions(); 
-  let iconSize = 36;
-  let buttonFontSize = 14;
-  let courseTitleSize = 36;  
-  let squareSize = 170
-
-  console.log( height +' and '+ width)
   console.log( PixelRatio.get())  
 
   return (
       <View style={[styles.container]}>
-        <StatusBar barStyle="dark-content" backgroundColor={colors.mediumColor} />
-        
+        <StatusBar barStyle="light-content" backgroundColor={context[0].darkColor} />
         
         {/* blocco Ateneo + Economia */}
           <View style={styles.visteBottoni}>
@@ -33,7 +29,10 @@ function HomeScreen() {
               textColor='white'
               bkColor={colors.tvColor}
               bkColorPressed={colors.tvColorPressed}
-            />
+              rippleRadius={120}
+           />
+
+           <Text>{props}</Text>
 
             <CustomButton 
               url='https://economia.uniroma2.it/'
@@ -43,7 +42,8 @@ function HomeScreen() {
               textColor='white'
               bkColor={colors.economiaColor}
               bkColorPressed={colors.economiaColorPressed}
-            />           
+                rippleRadius={120}/>        
+
             
 
           </View>
@@ -51,16 +51,17 @@ function HomeScreen() {
 
         
         {/* blocco corso di Laurea */}
-          <View style={[styles.visteBottoni, {flex:2}]}> 
+          <View  style={[styles.visteBottoni, {flex:2}]}> 
             
             <CustomButton 
-              url='https://economia.uniroma2.it/ba/globalgovernance'           
-              testo1='Bachelor'
-              testo2='Degree'
+              url={'https://economia.uniroma2.it/'+ context[0].api+''}
+              name={context[0].name}           
+              testo1={context[0].type1}
+              testo2={context[0].type2}
               textColor='white'
-              bkColor={colors.mediumColor}
-              bkColorPressed={colors.darkColor}            
-            />  
+              bkColor={context[0].mediumColor}
+              bkColorPressed={context[0].darkColor}            
+                rippleRadius={250}/>  
 
           </View>
 
@@ -77,7 +78,8 @@ function HomeScreen() {
               textColor={colors.economiaColor}
               bkColor={colors.linkTreeColor}
               bkColorPressed={colors.linkTreeColorPressed}
-            />
+              rippleRadius={120}
+           />
 
             <CustomButton 
               url='https://delphi.uniroma2.it/totem/jsp/homeStudenti.jsp?language=EN'
@@ -87,6 +89,7 @@ function HomeScreen() {
               textColor='white'
               bkColor={colors.delphiGreenColor}
               bkColorPressed={colors.delphiGreenColorPressed}
+              rippleRadius={120}
             /> 
 
           </View>

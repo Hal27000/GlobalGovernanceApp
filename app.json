@@ -1,13 +1,13 @@
 {
   "expo": {
     "jsEngine": "hermes",
-    "name": "Global Governance - Beta",
+    "name": "EconoMia - Beta",
     "slug": "GlobalGovernance",
     "version": "0.9.0",
     "orientation": "portrait",
     "icon": "./assets/global-e.png",
     "splash": {
-      "image": "./assets/logotv.png",
+      "image": null,
       "resizeMode": "contain",
       "backgroundColor": "#00833f"
     },
@@ -26,6 +26,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d21957dc-7a88-4e53-a5f1-96f8627640d1"
+      }
     }
   }
 }

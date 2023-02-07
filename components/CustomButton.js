@@ -1,12 +1,12 @@
-import { View, Text, Pressable, StyleSheet, Image } from "react-native"
-import { colors} from "../config/config"
+import { View, Text, Pressable, StyleSheet, Image, Alert } from "react-native"
+import { course} from "../config/config"
 import { Component } from 'react';
 import * as WebBrowser from 'expo-web-browser';
 
 let marginSize = 4
 let iconSize = 36;
 let buttonFontSize = 14;
-let courseTitleSize = 36;
+let courseTitleSize = 30;
   
   
   let squareSize = 170
@@ -20,7 +20,11 @@ class CustomButton extends Component{
 
     render (){
       return(
-        <Pressable style={({pressed}) => [{backgroundColor: pressed ? this.props.bkColorPressed : this.props.bkColor}, styles.pressabili]}
+        <View style={{flex:1, overflow:"hidden", margin:4, borderRadius:10}}>
+          <Pressable onLongPress={()=>Alert.alert('Secret message',
+            'This app was proposed and developed by Alessio Huma.\nSpecial thanks to Eleonora Baldi Gianni, Sergio Viganò and Marcello Biaggio, without whom this app would have never been neither official nor as well-designed as it is.')} 
+            android_ripple={{color:this.props.bkColorPressed}} 
+            style={ [{backgroundColor: this.props.bkColor}, styles.pressabili]}
           onPress={()=>WebBrowser.openBrowserAsync(this.props.url)}>
                   
           <View style={{flex:1}}>
@@ -30,8 +34,12 @@ class CustomButton extends Component{
               </>
             : //else sarà il bottone corso di Laurea
               <View style={{flex:1, justifyContent:'center', marginLeft:20}}>
-                <Text style={[styles.titoloCorso,{fontSize:courseTitleSize}]}>GLOBAL</Text>
-                <Text style={[styles.titoloCorso,{fontSize:courseTitleSize}]}>GOVERNANCE</Text>
+                {this.props.name.map( name =>
+                  <Text style={[styles.titoloCorso,{fontSize:courseTitleSize}]}>{name}</Text>
+                )}
+                {/* <Text style={[styles.titoloCorso,{fontSize:courseTitleSize}]}>ECONOMIA</Text>
+                <Text style={[styles.titoloCorso,{fontSize:courseTitleSize}]}>E</Text>
+                <Text style={[styles.titoloCorso,{fontSize:courseTitleSize}]}>FINANZA</Text> */}
               </View>
             }
             <View style={styles.posizionamentoIcone}>
@@ -42,6 +50,7 @@ class CustomButton extends Component{
                   
                     
         </Pressable>
+        </View>
       );
     }
   }
@@ -64,8 +73,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.4,
         shadowRadius:2,
         shadowOffset:{width:0,height:3},      
-        margin:marginSize,
-        borderRadius:10,  
+        
+          
     },
     posizionamentoIcone:{
       position:'absolute',

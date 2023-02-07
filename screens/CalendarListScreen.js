@@ -1,18 +1,22 @@
 import { View, StatusBar, Text, ActivityIndicator, StyleSheet} from "react-native";
-import { Calendario} from "../components/Calendario"
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { listaCorsi } from '../api/fetch';
 import { useNavigation } from '@react-navigation/native';
-import { colors } from "../config/config";
+import { course, AppContext } from "../config/config";
+import { Calendario2 } from "../components/Calendario";
 
-function CalendarListScreen(props){
+
+function CalendarListScreen({route}){
   const navigation = useNavigation()
+  const context = useContext(AppContext)
   const [isLoading, setLoading] = useState(false)
   return(
     <View  style={{ flex: 1}}>
-      <StatusBar barStyle="light-content" backgroundColor={colors.mediumColor} />
+      <StatusBar barStyle="light-content" backgroundColor={context[0].darkColor} />
+     
+      
 
-      <Calendario caricamento={()=>setLoading(!isLoading)} navigation={navigation} listaCorsi={listaCorsi}></Calendario>
+      <Calendario2 caricamento={()=>setLoading(!isLoading)} navigation={navigation} listaCorsi={listaCorsi}></Calendario2>
       
       {
         isLoading &&

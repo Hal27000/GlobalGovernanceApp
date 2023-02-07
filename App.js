@@ -9,62 +9,37 @@ import {HomeScreen} from './screens/HomeScreen'
 import { CourseScreen } from './screens/CourseScreen';
 import {CalendarListScreen} from './screens/CalendarListScreen'
 import {LectureDetailsScreen} from './screens/LectureDetailsScreen'
-
+import {ConfigScreen} from './screens/ConfigScreen'
 
 //Icons and Colors
-
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { colors } from './config/config';
+import { Ionicons} from '@expo/vector-icons';
+import { course, corsi, AppContext } from './config/config';
 import AppLoading from 'expo-app-loading';
-
-import { checkConnection} from "./api/fetch"
+import { checkConnection, fetchMainCalendar} from "./api/fetch"
 import { NoConnectionScreen } from './screens/NoConnectionScreen';
 
 
-
-
-
-
-
-//################################################## CLASSE AGENDA ############################## ciao
 // eas build -p android --profile development
-
-
-function TimetableScreen({navigation}) {
-  return (
-    
-    <Stack.Navigator initialRouteName={CalendarListScreen}>
-      <Stack.Screen name="CalendarListScreen" component={CalendarListScreen} options={{headerShown:false}}/>
-      <Stack.Screen name="LectureDetailsScreen" component={LectureDetailsScreen} options={{title:'Course Agenda'}}
-      
-      />
-
-
-    </Stack.Navigator>
-    
-    
-    
-  );
-}
 
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const baba = 5
-
-
-
 export default function App() {
 
-  const [isLoading, setIsLoading] = React.useState(true)
-  const [connection, setConnection] = React.useState(true)
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [connection, setConnection] = React.useState(true);
+  const [currentCourse, setCourse] = React.useState(corsi.baGG);
+
+  /* React.useEffect(() => { 
+    fetchMainCalendar(currentCourse.api) }
+  ); */
 
   try {
     checkConnection().then(res=>{
       console.log(res)
       setConnection(res)
-      console.log('App sta controllando')
+      //console.log('App sta controllando')
       setIsLoading(false)
     })
   } catch (error) {
@@ -73,80 +48,99 @@ export default function App() {
 
   if(isLoading){
     return(
-      <AppLoading></AppLoading>
-
-      
+      <AppLoading></AppLoading>      
     )
   }
   return (
-    <NavigationContainer>
+    <AppContext.Provider value={[currentCourse, setCourse]}>
+      <NavigationContainer>
+        <Tab.Navigator
 
-      <Tab.Navigator
-        initialRouteName="Home"
-        
-        screenOptions={{
-          tabBarActiveTintColor:colors.economiaColor,
-          tabBarInactiveTintColor:'grey',          
-          tabBarActiveBackgroundColor:'transparent',
-          
-          headerShown:false
-          
-        }}
-      >
-          
-        <Tab.Screen name="Home" component={connection?HomeScreen:NoConnectionScreen} 
-          options={({ navigation }) => ({
+          initialRouteName="Home"          
+          screenOptions={{
+            tabBarActiveTintColor:currentCourse.darkColor,
+            tabBarInactiveTintColor:'grey',          
+            tabBarActiveBackgroundColor:'transparent',            
+            headerShown:false            
+          }}
+        >
             
-            tabBarIcon: ({ focused, color }) => {
-
-              let iconName;
-              if (focused){
-                iconName = 'home'
-              }else{
-                iconName = 'home-outline'
-              }
-
-
-              return <Ionicons name={iconName} color={color} size={26} />
-            }
-          })}
-        />
-
-        
-        <Tab.Screen name="Timetable" component={TimetableScreen}
-          options={({ navigation }) => ({                      
-            tabBarIcon: ({ focused, color }) => {
-              let iconName;
-              if (focused){iconName = 'calendar'}else{iconName = 'calendar-outline'}
-              return <Ionicons name={iconName} size={26} color={color} />
-            },
-            tabBarStyle:{
+          <Tab.Screen name="Home" component={connection?HomeScreen:NoConnectionScreen} 
+            options={({ navigation }) => ({
               
-              position: 'absolute',
-              backgroundColor: '#ffffffe6',              
-              elevation:0
-            },
-            tabBarActiveTintColor:colors.economiaColor
-          })}
-        />
-        
+              tabBarIcon: ({ focused, color }) => {
 
-        <Tab.Screen name="Courses" component={CourseScreen}
-          options={({ navigation }) => ({                      
-            tabBarIcon: ({ focused, color }) => {
-              let iconName;
-              if (focused){iconName = 'library'}else{iconName = 'library-outline'}
-              return <Ionicons name={iconName} size={26} color={color} />
-            },
-            tabBarActiveTintColor:colors.economiaColor,
-            unmountOnBlur:true
-          })}
-        />
+                let iconName;
+                if (focused){
+                  iconName = 'home'
+                }else{
+                  iconName = 'home-outline'
+                }
+                return <Ionicons name={iconName} color={color} size={26} />
+                }
+            })}
+          />
 
-      </Tab.Navigator>
-    </NavigationContainer>
+          
+          <Tab.Screen name="Timetable" component={CalendarStack}
+            options={({ navigation }) => ({                      
+              tabBarIcon: ({ focused, color }) => {
+                let iconName;
+                if (focused){iconName = 'calendar'}else{iconName = 'calendar-outline'}
+                return <Ionicons name={iconName} size={26} color={color} />
+              },
+              unmountOnBlur:true,
+              tabBarStyle:{
+                
+                position: 'absolute',
+                backgroundColor: '#ffffffe6',              
+                elevation:0
+              },
+              tabBarActiveTintColor:currentCourse.darkColor
+            })}
+          />
+          
+
+          <Tab.Screen name="Courses" component={CourseScreen}
+            options={({ navigation }) => ({                      
+              tabBarIcon: ({ focused, color }) => {
+                let iconName;
+                if (focused){iconName = 'library'}else{iconName = 'library-outline'}
+                return <Ionicons name={iconName} size={26} color={color} />
+              },
+              tabBarActiveTintColor:currentCourse.darkColor,
+              unmountOnBlur:true
+            })}
+          />
+
+          <Tab.Screen name="Settings" component={ConfigScreen}
+            options={({ navigation }) => ({                      
+              tabBarIcon: ({ focused, color }) => {
+                let iconName;
+                if (focused){iconName = 'settings'}else{iconName = 'settings-outline'}
+                return <Ionicons name={iconName} size={26} color={color} />
+              },
+              tabBarActiveTintColor:currentCourse.darkColor,
+              unmountOnBlur:true
+            })}
+          />
+
+        </Tab.Navigator>
+      </NavigationContainer>
+    </AppContext.Provider>
   );
 }
+
+function CalendarStack(currentCourse) {
+  return (    
+    <Stack.Navigator initialRouteName={CalendarListScreen}>
+      <Stack.Screen name="CalendarListScreen" component={CalendarListScreen} options={{headerShown:false, currentCourse}}/>
+      <Stack.Screen name="LectureDetailsScreen" component={LectureDetailsScreen} options={{title:'Course Agenda'}}/>
+    </Stack.Navigator>
+  );
+}
+
+
 
 /*
 LocaleConfig.locales['it'] = {
