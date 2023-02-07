@@ -9,7 +9,7 @@ function NoConnectionScreen() {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <StatusBar barStyle="light-content" backgroundColor={colors.mediumColor} />
+        <StatusBar barStyle="light-content" backgroundColor={course.darkColor} />
         <MaterialIcons name="wifi-off" size={60} color="grey" />
         <Text>It seems like your internet connection is not working.</Text>
         <Text>Please close the app, connect to an internet connection </Text>
