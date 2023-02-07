@@ -2,7 +2,7 @@
 
 
 
-## Configurare l'ambiente di sviluppo
+## [DEPRECATED] Configurare l'ambiente di sviluppo
 
 C'è bisogno di node.js ed npm. Installando l'ultima versione di node.js dal sito installerà anche npm
 
