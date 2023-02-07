@@ -1,27 +1,7 @@
 //in questo file vengono settati i parametri ed i colori per adattare l'app agli altri corsi di laurea
-
 import { createContext } from "react"
 
 export const AppContext = createContext()
-
-const colors = {
-    //colore StatusBar (attualmente non usato)
-    statusBarColor:"#006600",
-    //altri colori
-    greyBack : "#f2f2f2",
-    //colori economia
-    economiaColor:"#990033",
-    economiaColorPressed:"#600022",
-    // colori ateneo
-    tvColor:"#007c34",
-    tvColorPressed:"#004411",
-    //colori Delphi
-    delphiGreenColor:'#2d7c5f',
-    delphiGreenColorPressed:'#184433',
-    //colori sfondo beige linktree
-    linkTreeColor:'#e6e6dc',
-    linkTreeColorPressed:'#b6b6b6'
-}
 
 const fonts = 'sans-serif'
 
@@ -157,4 +137,4 @@ const corsi = {
 let course = corsi.baBAE
 // Esempi di url- global: ba/globalgovernance , B.A.: master-science/ba
 
-export {colors, course , fonts, corsi}
+export { course , fonts, corsi}

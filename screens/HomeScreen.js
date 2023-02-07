@@ -1,5 +1,6 @@
 import { View, StatusBar, StyleSheet, useWindowDimensions, PixelRatio, Text} from "react-native";
-import { colors, course, AppContext } from "../config/config";
+import { course, AppContext } from "../config/config";
+import { colors } from '../config/colors'
 import {CustomButton} from "../components/CustomButton"
 import {useContext} from 'react'
 

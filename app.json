@@ -7,7 +7,7 @@
     "orientation": "portrait",
     "icon": "./assets/global-e.png",
     "splash": {
-      "image": null,
+      "image": "null",
       "resizeMode": "contain",
       "backgroundColor": "#00833f"
     },

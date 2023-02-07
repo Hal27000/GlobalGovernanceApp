@@ -6,7 +6,8 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { listaCorsi } from '../api/fetch';
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
-import { colors, course,  fonts, AppContext } from '../config/config';
+import { course,  fonts, AppContext } from '../config/config';
+import { colors } from '../config/colors'
 import { borderLeftColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 

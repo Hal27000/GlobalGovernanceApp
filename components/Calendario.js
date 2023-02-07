@@ -4,7 +4,8 @@ import { Agenda } from 'react-native-calendars';
 import { primoAnno, secondoAnno, terzoAnno, timetableObj, fetchMainCalendar, fetchCourseCalendar } from '../api/fetch';
 import FloatingButton from './FloatingButton'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { colors, fonts, AppContext } from '../config/config';
+import { fonts, AppContext } from '../config/config';
+import { colors } from '../config/colors'
 
 
 export const Calendario2 = (props)=>{

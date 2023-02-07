@@ -14,7 +14,7 @@ import {ConfigScreen} from './screens/ConfigScreen'
 //Icons and Colors
 import { Ionicons} from '@expo/vector-icons';
 import { course, corsi, AppContext } from './config/config';
-import AppLoading from 'expo-app-loading';
+
 import { checkConnection, fetchMainCalendar} from "./api/fetch"
 import { NoConnectionScreen } from './screens/NoConnectionScreen';
 
@@ -48,7 +48,8 @@ export default function App() {
 
   if(isLoading){
     return(
-      <AppLoading></AppLoading>      
+      //da inserire Splash Screen
+      <></>      
     )
   }
   return (
