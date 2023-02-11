@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState, useEffect} from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -27,11 +27,11 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
 
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [connection, setConnection] = React.useState(true);
-  const [currentCourse, setCourse] = React.useState(corsi.baGG);
+  const [isLoading, setIsLoading] = useState(true);
+  const [connection, setConnection] = useState(true);
+  const [currentCourse, setCourse] = useState(corsi.baGG);
 
-  /* React.useEffect(() => { 
+  /* useEffect(() => { 
     fetchMainCalendar(currentCourse.api) }
   ); */
 

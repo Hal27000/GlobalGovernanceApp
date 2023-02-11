@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, StatusBar, TouchableHighlight, Pressable, StyleSheet, PixelRatio} from "react-native";
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import {useContext} from 'react';
 //import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { listaCorsi } from '../api/fetch';
@@ -12,7 +12,7 @@ import { colors } from '../config/colors'
 
 function LectureDetailsScreen({route}){
 
-  const context = React.useContext(AppContext)
+  const context = useContext(AppContext)
   const {nomeCorso, data, courseId, aula, nomeDocente} = route.params
   
   while (listaCorsi[courseId] === undefined){return <Text>Ciao</Text>}

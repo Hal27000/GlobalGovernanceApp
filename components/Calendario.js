@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState, useContext, useEffect} from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, Pressable } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import { primoAnno, secondoAnno, terzoAnno, timetableObj, fetchMainCalendar, fetchCourseCalendar } from '../api/fetch';
@@ -9,17 +9,17 @@ import { colors } from '../config/colors'
 
 
 export const Calendario2 = (props)=>{
-  const [items, setItems] = React.useState({});
-  const [first, setFirst] = React.useState({})
-  const [numeretto, setNumeretto] = React.useState(4);
-  const [currentDate, setCurrentDate] = React.useState({});
-  const [loading, setIsLoading] = React.useState(false);
+  const [items, setItems] = useState({});
+  const [first, setFirst] = useState({})
+  const [numeretto, setNumeretto] = useState(4);
+  const [currentDate, setCurrentDate] = useState({});
+  const [loading, setIsLoading] = useState(false);
 
   console.log(primoAnno)
 
-  const context = React.useContext(AppContext)
+  const context = useContext(AppContext)
 
-  React.useEffect(()=>{
+  useEffect(()=>{
     fetchMainCalendar(context[0].api)
   });
 

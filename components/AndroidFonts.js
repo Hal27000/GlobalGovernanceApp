@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { ScrollView, Text, StyleSheet} from 'react-native';
 
 const styles=StyleSheet.create({

@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text, StatusBar, Pressable} from "react-native";
-import React, { useState} from 'react';
+import { useState, useRef} from 'react';
 import { WebView } from 'react-native-webview';
 import ProgressBar from 'react-native-progress/Bar';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -11,7 +11,7 @@ import { course } from "../config/config";
 
 function LinkScreen() {
 
-  const webViewRef = React.useRef(null)
+  const webViewRef = useRef(null)
   
   const goback = () => {
     webViewRef.current.goBack();

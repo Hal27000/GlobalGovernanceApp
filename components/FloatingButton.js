@@ -1,9 +1,9 @@
-import React from "react";
+import {Component} from "react";
 import {View, Text, StyleSheet, Animated, TouchableHighlight, Pressable} from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {course, fonts} from '../config/config'
 
-export default class FloatingButton extends React.Component{
+export default class FloatingButton extends Component{
     animation = new Animated.Value(0);
     
     toggleMenu = (n,cambio) => {
